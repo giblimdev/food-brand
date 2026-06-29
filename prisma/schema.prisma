@@ -69,16 +69,451 @@ model VerificationToken {
   @@unique([identifier, token])
   @@map("verification_tokens")
 }
-
-// ============================================
-// DOMAIN MODELS
-// ============================================
-
 enum Role {
   CLIENT
   BUSINESS
   COLLABORATOR
 }
+
+// ============================================
+// DEV MODELS
+// ============================================
+
+
+// Epics
+//  AUTHENTIFICATION
+//  CATALOGUE
+//  PANIER_COMMANDE
+//  LIVRAISON
+//  PAIEMENT
+//  GESTION_PRODUITS
+//  GESTION_COMMANDES
+//  GESTION_UTILISATEURS
+//  GESTION_STOCK
+//  SEO_ANALYTICS
+//  UI_UX
+//  API_INTEGRATION
+//  PERFORMANCES
+//  SECURITE
+//  AUTRE
+
+
+
+// 1. EPIC - Uniquement des catégories, pas de hiérarchie
+model Epic {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  
+  name        String   @unique 
+  label       String   
+  description String?  
+  
+  // Métadonnées
+  icon        String?  
+  color       String?  
+  emoji       String?  
+  
+  status      Status @default(PLANNED)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  features    Feature[] // ✅ Une Epic peut avoir plusieurs Features
+  
+  @@index([name])
+  @@index([status])
+  @@map("epics")
+}
+
+// 2. FEATURE 
+model Feature {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  
+  // Lien vers l'Epic (obligatoire)
+  epicId      String   @db.Uuid
+  epic        Epic     @relation(fields: [epicId], references: [id], onDelete: Restrict)
+  
+ 
+  // Personas, status, priority...
+  personas    Persona[] @default([CLIENT])
+  status      Status @default(PLANNED)
+  priority    Priority      @default(MEDIUM)
+  
+  files       Json?
+  dependencies String[] @default([])
+  
+  estimatedHours Int?   @default(0)
+  sprint       String?  @db.VarChar(50)
+  assignedTo   String?  @db.VarChar(100)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  completedAt DateTime?
+  
+  @@index([epicId])
+  @@index([status])
+  @@index([priority])
+  @@map("features")
+}
+
+// 3. SCHEMA - Le fichier schema.prisma
+model Schema {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  
+  // Informations
+  name        String   @db.VarChar(255)      // "Food Brand DB"
+  description String?  @db.Text              // Description du schéma
+  version     String   @db.VarChar(20) @default("1.0.0")
+  
+  // Statut
+  status      SchemaStatus @default(PENDING)
+  isValid     Boolean   @default(false)
+  
+  // Validation
+  lastChecked DateTime?
+  differences Json?     // Résumé des différences (simple)
+  
+  // Dates
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  models      Model[]   // Tous les modèles du schéma
+  
+  @@index([status])
+  @@map("schemas")
+  schemaValidations SchemaValidation[]
+}
+
+// 4. MODEL - Un modèle Prisma (ex: User, Product, Order)
+model Model {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  
+  // Informations du modèle
+  name        String   @db.VarChar(255)      // "User", "Product"
+  label       String?  @db.VarChar(255)      // "👤 Utilisateur"
+  description String?  @db.Text              // Description du modèle
+  
+  // Métadonnées
+  isEnum      Boolean  @default(false)       // Est-ce un enum ?
+  isView      Boolean  @default(false)       // Est-ce une vue ?
+  isAbstract  Boolean  @default(false)       // Est-ce abstrait ?
+  
+  
+  // Relation avec le schéma
+  schemaId    String   @db.Uuid
+  schema      Schema   @relation(fields: [schemaId], references: [id], onDelete: Cascade)
+  
+  // Dates
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  fields      Field[]   // Tous les champs du modèle
+  
+  @@unique([schemaId, name])
+  @@index([schemaId])
+  @@index([name])
+  @@map("models")
+}
+
+// 5. FIELD - Un champ d'un modèle (ex: email, name, createdAt)
+model Field {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  
+  // Informations du champ
+  name        String   @db.VarChar(255)      // "email", "name"
+  label       String?  @db.VarChar(255)      // "📧 Email"
+  description String?  @db.Text              // Description du champ
+  
+  // Type Prisma (string, int, boolean, etc.)
+  type        String   @db.VarChar(50)       // "String", "Int", "Boolean"
+  isOptional  Boolean  @default(false)       // Est-ce optionnel ?
+  isList      Boolean  @default(false)       // Est-ce une liste ?
+  
+  // Attributs spéciaux
+  isId        Boolean  @default(false)       // @id
+  isUnique    Boolean  @default(false)       // @unique
+  isCreatedAt Boolean  @default(false)       // @default(now())
+  isUpdatedAt Boolean  @default(false)       // @updatedAt
+  
+  // Valeur par défaut (simple)
+  defaultValue String? @db.VarChar(255)      // "now()", "uuid()", "true"
+  
+  // ✅ Référence vers un autre modèle (relation)
+  // Exemple: userId → User
+  reference   String?  @db.VarChar(255)      // "User" (nom du modèle référencé)
+  
+  // Relation avec le modèle
+  modelId     String   @db.Uuid
+  model       Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  
+  // Dates
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([modelId, name])
+  @@index([modelId])
+  @@index([type])
+  @@map("fields")
+}
+
+// 6. SCHEMA_VALIDATION - Historique des validations
+model SchemaValidation {
+  id          String   @id @default(uuid())
+  
+  schemaId    String   @db.Uuid
+  schema      Schema   @relation(fields: [schemaId], references: [id], onDelete: Cascade)
+  
+  isValid     Boolean  @default(false)
+  differences Json?    // Résumé des différences
+  errors      Json?    // [{table, field, message}]
+  warnings    Json?    // [{table, field, message}]
+  
+  checkedAt   DateTime @default(now())
+  checkedBy   String?  @db.VarChar(100)
+  durationMs  Int?
+  
+  @@index([schemaId])
+  @@index([checkedAt])
+  @@map("schema_validations")
+}
+
+
+
+// 7. FILE - Fichiers de l'architecture
+model File {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  
+  // ========== INFORMATIONS PRINCIPALES ==========
+  
+  // Chemin du fichier (unique)
+  path        String   @unique @db.VarChar(500)
+  
+  // Nom affichable
+  label       String   @db.VarChar(255)
+  
+  // Type de fichier (layout, page, composant, etc.)
+  type        FileType @default(OTHER)
+  
+  // ========== MÉTADONNÉES ==========
+  
+  // Rôle du fichier (ex: "Gestion des utilisateurs")
+  role        String?  @db.VarChar(255)
+  
+  // Description du fonctionnement
+  fonctionnement String? @db.Text
+  
+  // 📝 Imports et Exports (en texte simple)
+  imports     String?  @db.Text   // "import { NextResponse } from 'next/server'"
+  exports     String?  @db.Text   // "export default function Page()"
+  
+  // 💾 Contenu du fichier (optionnel - pour le debug)
+  content     String?  @db.Text   // Le script complet du fichier
+  
+  // ========== HIÉRARCHIE ==========
+  
+  // Parent (pour l'arborescence)
+  parentId    String?  @db.Uuid
+  parent      File?    @relation("FileHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children    File[]   @relation("FileHierarchy")
+  
+  // ========== SYNCHRONISATION ==========
+  
+  syncStatus  SyncStatus @default(SYNCED)
+  lastSyncAt  DateTime?
+  localHash   String?  @db.VarChar(64) // Hash du fichier local
+  
+  // ========== RELATIONS ==========
+  
+  // IDs des features liées à ce fichier
+  featureIds  String[] @default([])
+  
+  // ========== DATES ==========
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // ========== INDEX ==========
+  
+  @@index([path])
+  @@index([type])
+  @@index([parentId])
+  @@index([syncStatus])
+  @@map("files")
+}
+
+
+
+// 8. LOG - Journal des actions DevTools
+model Log {
+  id          String   @id @default(uuid())
+  
+  // Type d'action
+  action      LogAction @default(SCAN)
+  category    LogCategory @default(SYSTEM)
+  
+  // Détails
+  message     String   @db.Text
+  details     Json?    // Données supplémentaires
+  status      LogStatus @default(SUCCESS)
+  
+  // Utilisateur
+  userId      String?  @db.VarChar(100)
+  userEmail   String?  @db.VarChar(255)
+  
+  // Métadonnées
+  ip          String?  @db.VarChar(45)
+  userAgent   String?  @db.Text
+  featureId   String?  @db.Uuid // Optionnel: lier un log à une feature
+  fileId      String?  @db.Uuid // Optionnel: lier un log à un fichier
+  
+  // Dates
+  createdAt   DateTime @default(now())
+  
+  @@index([action])
+  @@index([category])
+  @@index([createdAt])
+  @@index([featureId])
+  @@index([fileId])
+  @@map("logs")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+
+// Feature Personas
+enum Persona {
+  CLIENT
+  PRO
+  ADMIN
+  DEVELOPER
+  VISITEUR
+}
+
+// Status
+enum Status {
+  PLANNED
+  IN_PROGRESS
+  DONE
+  BLOCKED
+  REVIEW
+  TESTING
+  DEPLOYED
+}
+
+// Priority
+enum Priority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+  TRIVIAL
+}
+
+// Schema Status
+enum SchemaStatus {
+  PENDING
+  VALIDATING
+  VALID
+  INVALID
+  ERROR
+  OUTDATED
+}
+
+// File Types
+enum FileType {
+  LAYOUT
+  PAGE
+  COMPOSANT
+  LIB
+  UTILS
+  NEXT
+  STORE
+  API
+  CONFIG
+  MIDDLEWARE
+  SCHEMA
+  ACTION
+  HOOK
+  STYLE
+  TEST
+  DOCUMENTATION
+  SCRIPT
+  OTHER
+}
+
+// Sync Status
+enum SyncStatus {
+  SYNCED
+  LOCAL_NEWER
+  DB_NEWER
+  CONFLICT
+  MISSING_LOCAL
+  MISSING_DB
+}
+
+// Log Actions
+enum LogAction {
+  SCAN
+  CREATE
+  UPDATE
+  DELETE
+  SYNC
+  VALIDATE
+  DEPLOY
+  ROLLBACK
+  IMPORT
+  EXPORT
+  GENERATE
+  OTHER
+}
+
+// Log Categories
+enum LogCategory {
+  SYSTEM
+  DATABASE
+  FILESYSTEM
+  API
+  SECURITY
+  USER
+  FEATURE
+  SCHEMA
+  DEPLOYMENT
+}
+
+// Log Status
+enum LogStatus {
+  SUCCESS
+  WARNING
+  ERROR
+  INFO
+  PENDING
+  CANCELLED
+}
+
+
+
+// ============================================
+// DOMAIN MODELS
+// ============================================
+
+
+
+
+
+
 
 model Glossary {
   id          String   @id @default(uuid())
