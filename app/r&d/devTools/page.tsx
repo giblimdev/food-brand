@@ -1,4 +1,14 @@
 //@/app/r&d/devTools
+
+//type :  
+/*role : */              
+/*fonctionnement : */ 
+//imports [] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+
 /*
 cette page (@/app/r&d/devTools/page.tsx) doit afficher les fichier de mon application de facon conviviale
 afficher chaque section sous forme acoedion schadcn

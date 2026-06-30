@@ -1,0 +1,1309 @@
+//
+
+//type :  page
+/*role : presente les senario apartir du schema de db et des persona*/              
+/*fonctionnement : */ 
+//imports [] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+/*
+
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+// ============================================
+// BETTER AUTH - SCHEMA STANDARD
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+      role          String    @default("CLIENT")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions Session[]
+  accounts Account[]
+  profile Profile[]
+ 
+ 
+  glossaries Glossary[]
+  favorites Favorite[]
+  addresses Address[]
+  notifications Notification[]
+  drivers Driver[]
+  orderStatusHistories OrderStatusHistory[]
+  orders Order[] @relation("OrderUser")
+  customers Customer[]
+  stockMovements StockMovement[]
+  brandOwners BrandOwner[]
+  brands Brand[] @relation("BrandCreator")
+  teamMembers TeamMember[]
+  teams Team[] @relation("TeamCreator")
+  reviews Review[]
+ @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  ipAddress    String?
+  userAgent    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Account {
+  id                    String   @id @default(cuid())
+  userId                String
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verifications")
+}
+enum Role {
+  GUEST
+  CLIENT
+  BUSINESS
+  COLLABORATOR
+  LIVREUR
+  ADMIN
+}
+// ============================================
+// PROFIL UTILISATEUR (1:1 avec User)
+// ============================================
+
+model Profile {
+  id            String    @id @default(uuid()) @db.Uuid
+  bio           String?   @db.Text           // biographie / description
+  phone         String?                      // numéro de téléphone
+  website       String?                      // site web personnel ou professionnel
+  birthDate     DateTime?                    // date de naissance
+  gender        Gender?   @default(OTHER)   // genre (optionnel)
+  // Réseaux sociaux
+  twitter       String?
+  instagram     String?
+  facebook      String?
+  linkedin      String?
+  // Préférences (stockées en JSON pour plus de flexibilité)
+  preferences   Json?                        // ex: { "theme": "dark", "notifications": true }
+  // Métadonnées
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+galleries Gallery[]
+  
+  @@map("profiles")
+  users User[]
+}
+
+// Enum pour le genre (optionnel)
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+// ============================================
+// DEV MODELS
+// ============================================
+
+model Epic {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  name        String   @unique
+  label       String
+  description String?
+  icon        String?
+  color       String?
+  emoji       String?
+  status      Status   @default(PLANNED)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  features    Feature[]
+
+  @@index([name])
+  @@index([status])
+  @@map("epics")
+}
+
+model Feature {
+  id              String     @id @default(uuid()) 
+  order           Int?       @default(0)
+  title           String
+  description     String?
+  epicId          String     
+  epic            Epic       @relation(fields: [epicId], references: [id], onDelete: Restrict)
+  personas        Persona[]  @default([CLIENT])
+  status          Status     @default(PLANNED)
+  priority        Priority   @default(MEDIUM)
+  files           Json?
+  dependencies    String[]   @default([])
+  estimatedHours  Int?       @default(0)
+  assignedTo      String?    @db.VarChar(100)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  completedAt     DateTime?
+  sprintId        String?    
+  sprint          Sprint?    @relation(fields: [sprintId], references: [id])
+
+  @@index([epicId])
+  @@index([status])
+  @@index([priority])
+  @@map("features")
+}
+
+model Sprint {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  name        String
+  startDate   DateTime
+  endDate     DateTime
+  status      Status
+  features    Feature[]
+
+  @@map("sprints")
+}
+
+model Schema {
+  id          String   @id @default(uuid()) 
+    order       Int?     @default(0)
+  name        String
+  description String?  
+  version     String   @default("1.0.0")
+  status      SchemaStatus @default(PENDING)
+  isValid     Boolean  @default(false)
+  lastChecked DateTime?
+  differences Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  models      Model[]
+  schemaValidations SchemaValidation[]
+
+  @@index([status])
+  @@map("schemas")
+}
+
+model Model {
+  id          String   @id @default(uuid())
+  order       Int?     @default(0)
+  name        String
+  label       String?
+  description String?
+  schemaId    String   
+  schema      Schema   @relation(fields: [schemaId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  fields      Field[]
+
+  @@unique([schemaId, name])
+  @@index([schemaId])
+  @@index([name])
+  @@map("models")
+}
+
+model Field {
+  id           String   @id @default(uuid()) 
+  order        Int?     @default(0)
+  name         String
+  description  String?  
+  comment      String?
+  type         String
+  isOptional   Boolean  @default(false)
+  isId         Boolean  @default(false)
+  isUnique     Boolean  @default(false)
+  isCreatedAt  Boolean  @default(false)
+  defaultValue String?
+  reference    String?
+  modelId      String   
+  model        Model    @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([modelId, name])
+  @@index([modelId])
+  @@index([type])
+  @@map("fields")
+}
+
+model SchemaValidation {
+  id          String   @id @default(uuid()) 
+  schemaId    String   
+  schema      Schema   @relation(fields: [schemaId], references: [id], onDelete: Cascade)
+  isValid     Boolean  @default(false)
+  differences Json?
+  errors      Json?
+  warnings    Json?
+  checkedAt   DateTime @default(now())
+  checkedBy   String?  @db.VarChar(100)
+  durationMs  Int?
+
+  @@index([schemaId])
+  @@index([checkedAt])
+  @@map("schema_validations")
+}
+
+model File {
+  id              String     @id @default(uuid()) 
+    order           Int?       @default(0)
+  path            String     @unique 
+  label           String     
+  type            FileType   @default(OTHER)
+  role            String?    
+  fonctionnement  String?
+  imports         String[]    @default([])
+  exports         String[]    @default([])
+  useby           String[]  @default([])
+  noteIA          String?
+  content         String?
+  parentId        String?    
+  parent          File?      @relation("FileHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children        File[]     @relation("FileHierarchy")
+  syncStatus      SyncStatus @default(SYNCED)
+  lastSyncAt      DateTime?
+  localHash       String?    
+  featureIds      String[]   @default([])
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@index([path])
+  @@index([type])
+  @@index([parentId])
+  @@index([syncStatus])
+  @@map("files")
+}
+
+model Log {
+  id          String      @id @default(uuid()) 
+  action      LogAction   @default(SCAN)
+  category    LogCategory @default(SYSTEM)
+  message     String
+  details     Json?
+  status      LogStatus   @default(SUCCESS)
+  userId      String?
+  userEmail   String?
+  ip          String?
+  userAgent   String?
+  featureId   String?     
+  fileId      String?     
+  createdAt   DateTime    @default(now())
+
+  @@index([action])
+  @@index([category])
+  @@index([createdAt])
+  @@index([featureId])
+  @@index([fileId])
+  @@map("logs")
+}
+
+// ============================================
+// ENUMS (Dev)
+// ============================================
+
+enum Persona {
+  CLIENT
+  PRO
+  ADMIN
+  DEVELOPER
+  VISITEUR
+  LIVREUR
+}
+
+enum Status {
+  PLANNED
+  IN_PROGRESS
+  DONE
+  BLOCKED
+  REVIEW
+  TESTING
+  DEPLOYED
+}
+
+enum Priority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+  TRIVIAL
+}
+
+enum SchemaStatus {
+  PENDING
+  VALIDATING
+  VALID
+  INVALID
+  ERROR
+  OUTDATED
+}
+
+enum FileType {
+  LAYOUT
+  PAGE
+  COMPOSANT
+  LIB
+  UTILS
+  NEXT
+  STORE
+  API
+  CONFIG
+  MIDDLEWARE
+  SCHEMA
+  ACTION
+  HOOK
+  STYLE
+  TEST
+  DOCUMENTATION
+  SCRIPT
+  OTHER
+}
+
+enum SyncStatus {
+  SYNCED
+  LOCAL_NEWER
+  DB_NEWER
+  CONFLICT
+  MISSING_LOCAL
+  MISSING_DB
+}
+
+enum LogAction {
+  SCAN
+  CREATE
+  UPDATE
+  DELETE
+  SYNC
+  VALIDATE
+  DEPLOY
+  ROLLBACK
+  IMPORT
+  EXPORT
+  GENERATE
+  OTHER
+}
+
+enum LogCategory {
+  SYSTEM
+  DATABASE
+  FILESYSTEM
+  API
+  SECURITY
+  USER
+  FEATURE
+  SCHEMA
+  DEPLOYMENT
+}
+
+enum LogStatus {
+  SUCCESS
+  WARNING
+  ERROR
+  INFO
+  PENDING
+  CANCELLED
+}
+
+// ============================================
+// DOMAIN MODELS
+// ============================================
+
+model Glossary {
+  id          String   @id @default(uuid())    
+  term        String   @unique
+  definition  String
+  createdBy   String   
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  creator     User     @relation(fields: [createdBy], references: [id])
+
+  @@map("glossary")
+}
+
+// ============================================
+// TEAM & ORGANIZATION
+// ============================================
+
+model Team {
+  id          String   @id @default(uuid()) 
+  name        String
+  description String? 
+  slug        String   @unique
+  logo        String?
+  parentId    String?   
+   createdById String   
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  parent      Team?           @relation("TeamHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children    Team[]          @relation("TeamHierarchy")
+  creator     User            @relation("TeamCreator", fields: [createdById], references: [id])
+  members     TeamMember[]
+  brands      Brand[]
+
+  @@index([parentId])
+  @@index([slug])
+  @@index([createdById])
+  @@map("teams")
+  galleries Gallery[]
+}
+
+model TeamMember {
+  id          String   @id @default(uuid()) @db.Uuid
+  teamId      String   
+    userId      String   
+  role        TeamRole @default(MEMBER)
+  joinedAt    DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  team        Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([teamId])
+  @@index([userId])
+  @@map("team_members")
+}
+
+enum TeamRole {
+  OWNER
+  ADMIN
+  MANAGER
+  MEMBER
+  VIEWER
+}
+
+
+// ============================================
+// BRAND WITH TEAM & OWNERS
+// ============================================
+
+model Brand {
+  id          String   @id @default(uuid()) 
+    name        String
+  description String?
+  logo        String?
+  createdById String   
+  teamId      String?  
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  creator     User          @relation("BrandCreator", fields: [createdById], references: [id])
+  team        Team?         @relation(fields: [teamId], references: [id], onDelete: SetNull)
+  owners      BrandOwner[]
+  restaurants Restaurant[]
+  recipes     Recipe[]
+  brandIngredients BrandIngredient[]
+  orders      Order[]
+  carts       Cart[]
+  dailyStats  DailyStats[]
+  promotions Promotion[]
+
+  @@index([teamId])
+  @@map("brands")
+  galleries Gallery[]
+}
+
+model BrandOwner {
+  id        String   @id @default(uuid())    
+  brandId   String  
+  userId    String   
+  role      OwnerRole @default(ADMIN)
+  joinedAt  DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  brand     Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([brandId, userId])
+  @@map("brand_owners")
+}
+
+enum OwnerRole {
+  ADMIN
+  MANAGER
+  VIEWER
+}
+
+
+// ============================================
+// RESTAURANTS & RECIPES
+// ============================================
+
+model Restaurant {
+  id          String   @id @default(uuid()) 
+  name        String
+  description String?  
+  address     String?  
+  phone       String?
+  brandId     String   
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  totalNote   Float?   @default(0)
+  ndvote       Int?     @default(0)
+
+  brand       Brand    @relation(fields: [brandId], references: [id])
+  recipes     Recipe[]
+  orders      Order[]
+  carts       Cart[]
+  promotions Promotion[]
+
+  @@map("restaurants")
+  reviews Review[]
+  favorites Favorite[]
+  galleries Gallery[]
+}
+
+model Recipe {
+  id          String   @id @default(uuid())   
+  name        String
+  description String?  
+  ingredients String?
+  instructions String? 
+  price       Float?
+  prepTime    Int?
+  image       String?
+  brandId     String   
+  restaurantId String? 
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  menuCategory  MenuCategory
+  brand       Brand           @relation(fields: [brandId], references: [id])
+  restaurant  Restaurant?     @relation(fields: [restaurantId], references: [id])
+  recipeIngredients RecipeIngredient[]
+  cartItems    CartItem[]
+  orderItems   OrderItem[]
+  promotions Promotion[]
+option    Option[]
+ tag Tag[] // Vegan,Halal, Bio, Epicé, Sans gluten,
+ 
+  @@map("recipes")
+  favorites Favorite[]
+  galleries Gallery[]
+}
+model Tag {
+  id          String   @id @default(uuid()) 
+  name        String   @unique
+  description String?  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+recipeId   String   
+  recipe     Recipe   @relation(fields: [recipeId], references: [id])
+  @@map("tags")
+}
+model Option {
+  id          String   @id @default(uuid()) 
+  name        String
+  description String?  
+  price       Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+
+  recipes Recipe[]
+}
+enum MenuCategory {
+  APPETIZER
+  MAIN_COURSE
+  DESSERT
+  BEVERAGE
+  SNACK
+}
+
+// ============================================
+// INGREDIENTS & STOCKS
+// ============================================
+
+model Ingredient {
+  id          String   @id @default(uuid()) 
+  name        String   @unique
+  description String?  
+  category    IngredientCategory @default(OTHER)
+  unit        Unit     @default(GRAM)
+  allergen    Allergen[]
+  tedAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  brandIngredients BrandIngredient[]
+  recipeIngredients RecipeIngredient[]
+
+  @@map("ingredients")
+}
+enum Allergen {
+  GLUTEN
+  CRUSTACEANS
+  EGGS
+  FISH
+  PEANUTS
+  SOYBEANS
+  MILK
+  NUTS
+  CELERY
+  MUSTARD
+  SESAME_SEEDS
+  SULPHUR_DIOXIDE
+  LUPIN
+  MOLLUSCS
+}
+
+model BrandIngredient {
+  id          String   @id @default(uuid()) 
+    brandId     String   
+  ingredientId String  
+  stock       Float    @default(0)
+  minStock    Float    @default(0)
+  maxStock    Float?
+  unit        Unit     @default(GRAM)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  ingredient  Ingredient   @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+  stockMovements StockMovement[]
+
+  @@unique([brandId, ingredientId])
+  @@map("brand_ingredients")
+}
+
+model RecipeIngredient {
+  id          String   @id @default(uuid()) 
+  recipeId    String   
+  ingredientId String  
+  quantity    Float
+  unit        Unit     @default(GRAM)
+  optional    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  recipe      Recipe      @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  ingredient  Ingredient  @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeId, ingredientId])
+  @@map("recipe_ingredients")
+}
+
+model StockMovement {
+  id          String   @id @default(uuid()) 
+  brandIngredientId String 
+  quantity    Float
+  type        StockMovementType
+  reason      String?  
+  orderId     String?  
+  createdById String?  
+  createdAt   DateTime @default(now())
+
+  brandIngredient BrandIngredient @relation(fields: [brandIngredientId], references: [id], onDelete: Cascade)
+  order           Order?          @relation(fields: [orderId], references: [id])
+  createdBy       User?           @relation(fields: [createdById], references: [id])
+
+  @@index([brandIngredientId])
+  @@index([createdAt])
+  @@map("stock_movements")
+}
+
+enum Unit {
+  GRAM
+  KILOGRAM
+  LITER
+  MILLILITER
+  UNIT
+  TABLESPOON
+  TEASPOON
+  CUP
+}
+
+enum IngredientCategory {
+  MEAT
+  FISH
+  VEGETABLE
+  FRUIT
+  DAIRY
+  GRAIN
+  SPICE
+  OIL
+  SAUCE
+  BEVERAGE
+  OTHER
+}
+
+enum StockMovementType {
+  PURCHASE
+  SALE
+  WASTE
+  RETURN
+  ADJUSTMENT
+  TRANSFER
+}
+
+// ============================================
+// ORDERS & DELIVERY
+// ============================================
+
+model Customer {
+  id          String   @id @default(uuid()) 
+  userId      String?  
+   email       String?
+  phone       String?
+  firstName   String?
+  lastName    String?
+  address     String?  
+  city        String?
+  postalCode  String?
+  country     String   @default("FR")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User?    @relation(fields: [userId], references: [id])
+  orders      Order[]
+  carts       Cart[]
+  reviews     Review[]
+
+  @@map("customers")
+}
+
+model Cart {
+  id          String   @id @default(uuid()) 
+  customerId  String?  
+  sessionId   String?
+  brandId     String   
+  restaurantId String? 
+  subtotal    Float    @default(0)
+  total       Float    @default(0)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  customer    Customer? @relation(fields: [customerId], references: [id])
+  brand       Brand     @relation(fields: [brandId], references: [id])
+  restaurant  Restaurant? @relation(fields: [restaurantId], references: [id])
+  items       CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id          String   @id @default(uuid()) 
+  cartId      String   
+  recipeId    String   
+  quantity    Int      @default(1)
+  unitPrice   Float
+  totalPrice  Float
+  specialInstructions String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  cart        Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  recipe      Recipe   @relation(fields: [recipeId], references: [id])
+
+  @@map("cart_items")
+}
+
+model Order {
+  id          String   @id @default(uuid()) 
+  orderNumber String   @unique
+  customerId  String   
+  brandId     String   
+  restaurantId String  
+  userId      String?  
+  
+  status      OrderStatus @default(PENDING)
+  paymentStatus PaymentStatus @default(UNPAID)
+  
+  subtotal    Float
+  deliveryFee Float    @default(0)
+  serviceFee  Float    @default(0)
+  tax         Float    @default(0)
+  discount    Float    @default(0)
+  total       Float
+  
+  deliveryAddress String 
+  deliveryLat    Float?
+  deliveryLng    Float?
+  deliveryInstructions String?
+  estimatedDeliveryTime DateTime?
+  actualDeliveryTime DateTime?
+  
+  paymentMethod PaymentMethod
+  paymentIntentId String?
+  paidAt      DateTime?
+  
+  placedAt    DateTime @default(now())
+  confirmedAt DateTime?
+  preparedAt  DateTime?
+  readyAt     DateTime?
+  deliveredAt DateTime?
+  cancelledAt DateTime?
+  cancelReason String?
+  
+  customer    Customer   @relation(fields: [customerId], references: [id])
+  brand       Brand      @relation(fields: [brandId], references: [id])
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id])
+  user        User?      @relation("OrderUser", fields: [userId], references: [id])
+  items       OrderItem[]
+  statusHistory OrderStatusHistory[]
+  stockMovements StockMovement[]
+  review      Review?
+
+  @@index([customerId])
+  @@index([brandId])
+  @@index([restaurantId])
+  @@index([status])
+  @@index([placedAt])
+  @@map("orders")
+  delivery    Delivery?
+  payments Payment[]
+}
+
+model OrderItem {
+  id          String   @id @default(uuid()) 
+  orderId     String   
+  recipeId    String   
+  quantity    Int
+  unitPrice   Float
+  totalPrice  Float
+  specialInstructions String?
+  createdAt   DateTime @default(now())
+
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  recipe      Recipe   @relation(fields: [recipeId], references: [id])
+
+  @@map("order_items")
+}
+
+model OrderStatusHistory {
+  id          String   @id @default(uuid()) 
+  orderId     String   
+  status      OrderStatus
+  note        String?
+  userId      String?  
+  createdAt   DateTime @default(now())
+
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  user        User?    @relation(fields: [userId], references: [id])
+
+  @@index([orderId])
+  @@index([createdAt])
+  @@map("order_status_history")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY
+  DELIVERING
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CARD
+  PAYPAL
+  CASH
+  APPLE_PAY
+  GOOGLE_PAY
+  OTHER
+}
+
+// ============================================
+// ANALYTICS & REVIEWS
+// ============================================
+
+model DailyStats {
+  id          String   @id @default(uuid()) 
+  date        DateTime
+  brandId     String   
+  
+  totalOrders Int      @default(0)
+  totalRevenue Float   @default(0)
+  avgOrderValue Float  @default(0)
+  
+  avgDeliveryTime Int?
+  onTimeDeliveryRate Float?
+  
+  stockValue  Float?
+  stockOutCount Int?   @default(0)
+  
+  avgRating   Float?
+  complaintsCount Int? @default(0)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  brand       Brand    @relation(fields: [brandId], references: [id])
+
+  @@unique([date, brandId])
+  @@index([brandId])
+  @@index([date])
+  @@map("daily_stats")
+}
+
+model Review {
+  id            String   @id @default(uuid())
+  orderId       String @unique   
+ customerId    String @unique      
+  restaurantId  String   
+  driverId      String?     // null si pas de livraison (à emporter/sur place)
+
+  restaurantRating  Int?            // note du restaurant (1-5)
+  restaurantComment String?  
+  driverRating      Int?            // note du livreur (1-5)
+  driverComment     String?  @db.Text
+
+  images        String[]
+  status        ReviewStatus @default(PENDING)
+  response      String?  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  order         Order      @relation(fields: [orderId], references: [id])
+  customer      Customer   @relation(fields: [customerId], references: [id])
+  restaurant    Restaurant @relation(fields: [restaurantId], references: [id])
+  driver        Driver?    @relation(fields: [driverId], references: [id])
+
+  @@index([restaurantId])
+  @@index([driverId])
+  @@map("reviews")
+  users User[]
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  RESPONDED
+}
+
+model Driver {
+  id            String   @id @default(uuid()) 
+  userId        String   @unique 
+  phone         String
+  licenseNumber String?
+  vehicleType   VehicleType @default(BIKE)
+  status        DriverStatus @default(OFFLINE)
+  currentLat    Float?
+  currentLng    Float?
+  rating        Float?   @default(5.0)
+  isVerified    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id])
+  deliveries    Delivery[]
+
+  @@index([status])
+  @@map("drivers")
+  reviews Review[]
+}
+
+enum VehicleType {
+  BIKE
+  SCOOTER
+  CAR
+  VAN
+  ON_FOOT
+}
+
+
+enum DriverStatus {
+  OFFLINE
+  AVAILABLE
+  ON_DELIVERY
+  ON_BREAK
+  SUSPENDED
+}
+
+
+model Delivery {
+  id              String   @id @default(uuid()) 
+  orderId         String   @unique
+  driverId        String?  
+  zoneId          String?  
+
+  status          DeliveryStatus @default(PENDING)
+
+  pickupLat       Float?
+  pickupLng       Float?
+  pickupAddress   String?  
+
+  dropoffLat      Float?
+  dropoffLng      Float?
+  dropoffAddress  String   
+
+  distanceKm      Float?
+  estimatedTime   Int?     // minutes
+  
+  assignedAt      DateTime?
+  pickedUpAt      DateTime?
+  deliveredAt     DateTime?
+  failedReason    String?
+
+  deliveryFee     Float    @default(0)
+  driverEarning   Float?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  order           Order    @relation(fields: [orderId], references: [id])
+  driver          Driver?  @relation(fields: [driverId], references: [id])
+  trackingPoints  DeliveryTracking[]
+
+  @@index([driverId])
+  @@index([status])
+  @@map("deliveries")
+}
+
+enum DeliveryStatus {
+  PENDING
+  ASSIGNED
+  ACCEPTED
+  PICKED_UP
+  IN_TRANSIT
+  DELIVERED
+  FAILED
+  CANCELLED
+}
+
+model DeliveryTracking {
+  id          String   @id @default(uuid()) 
+  deliveryId  String   
+  lat         Float
+  lng         Float
+  recordedAt  DateTime @default(now())
+
+  delivery    Delivery @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
+
+  @@index([deliveryId])
+  @@index([recordedAt])
+  @@map("delivery_tracking")
+}
+
+model Payment {
+  id              String   @id @default(uuid()) 
+  orderId         String   
+  amount          Float
+  currency        String   @default("EUR")
+  provider        PaymentMethod
+  providerTxId    String?
+  status          PaymentStatus
+  failureReason   String?
+  refundedAmount  Float?   @default(0)
+  createdAt       DateTime @default(now())
+
+  order           Order    @relation(fields: [orderId], references: [id])
+  @@map("payments")
+}
+
+model Notification {
+  id        String   @id @default(uuid()) 
+  userId    String   
+  type      NotificationType
+  NotificationMedium NotificationMedium
+  title     String
+  body      String
+  isRead    Boolean  @default(false)
+  data      Json?
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+enum NotificationMedium {
+  EMAIL
+  SMS
+  watsapp
+  PUSH
+}
+
+enum NotificationType {
+  ORDER_STATUS
+  PROMOTION
+  DELIVERY_UPDATE
+  SYSTEM
+}
+
+model Address {
+  id          String   @id @default(uuid()) 
+  userId      String   
+   label       String?  // "Maison", "Travail"
+  address     String  
+  lat         Float?
+  lng         Float?
+  isDefault   Boolean  @default(false)
+
+  user        User     @relation(fields: [userId], references: [id])
+  @@map("addresses")
+}
+model Favorite {
+  id          String   @id @default(uuid()) 
+  userId      String   
+  restaurantId String? 
+  recipeId     String? 
+  createdAt   DateTime @default(now())
+
+  user        User       @relation(fields: [userId], references: [id])
+  restaurant  Restaurant? @relation(fields: [restaurantId], references: [id])
+  recipe      Recipe?     @relation(fields: [recipeId], references: [id])
+  @@unique([userId, restaurantId, recipeId])
+  @@map("favorites")
+}
+model Promotion {
+  id            String   @id @default(uuid())
+  code          String   @unique
+  type          PromoType
+  value         Float
+  minOrderValue Float?
+  maxUses       Int?
+  usedCount     Int      @default(0)
+  startsAt      DateTime
+  endsAt        DateTime
+  isActive      Boolean  @default(true)
+  brandId       String?  
+  restaurantId  String?  
+  recipeId      String?  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  
+  recipes Recipe[]
+  restaurants Restaurant[]
+  brands Brand[]
+  @@map("promotions")
+}
+
+enum PromoType {
+  PERCENTAGE
+  FIXED_AMOUNT
+  FREE_DELIVERY
+}
+
+// ============================================
+// GALERIE D'IMAGES
+// ============================================
+
+model Gallery {
+  id            String    @id @default(uuid()) 
+  name          String    // Nom de la galerie (ex: "Photos du restaurant", "Menu")
+  description   String?   
+  coverImage    String?   // URL de l'image de couverture
+  images        Image[]   // Tableau d'URLs ou image base 64
+  // Relations optionnelles : à quelle entité appartient cette galerie ?
+  brandId       String?   
+  restaurantId  String?   
+  recipeId      String?
+  teamId        String?   
+  // Relations
+  brand         Brand?      @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  restaurant    Restaurant? @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  recipe        Recipe?     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  team          Team?       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  // Métadonnées
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([brandId])
+  @@index([restaurantId])
+  @@index([recipeId])
+  @@map("galleries")
+  profiles Profile[]
+}
+model Image {
+  
+  id          String   @id @default(uuid()) 
+  imageUrl   String   // URL de l'image ou image base 64
+  altText    String?
+  IsMain     Boolean  @default(false) // Indique si c'est l'image principale de la galerie
+  order      Int?     @default(0) // Ordre d'affichage dans la  
+  galleryId   String?  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  gallery     Gallery? @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+
+  @@index([galleryId])
+  @@map("images")
+}
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+import React from 'react'
+import Senario from './senario'
+
+function page() {
+  return (
+    <div><Senario/></div>
+  )
+}
+
+export default page

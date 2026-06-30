@@ -1,6 +1,17 @@
-// app/r&d/page.tsx
+//@/app/r&d/page.tsx
+
+//type : page 
+/*role : 
+affiches l'arborecence et les script*/              
+/*fonctionnement : utilise le composant FileRxplorer et expose en props EXPLORE_ROOT*/ 
+//imports [@/componant/, @/config] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+
+
 import React from 'react';
-import Stack from '@/app/r&d/Stack';
 import { files, fileStats, filesByType } from './architectureData';
 import {
   FolderTree,
@@ -33,6 +44,7 @@ Network,
   File,
   Code2
 } from 'lucide-react';
+import LocalFileExplorer from './LocalFileExplorer';
 
 // Fonction pour obtenir l'icône selon le type de fichier
 const getFileIcon = (type: string) => {
@@ -164,9 +176,9 @@ function ArchitecturePage() {
           </div>
         </header>
 
-        {/* Stack Technique */}
+        {/* LocalFileExplorer */}
         <section className="mb-16">
-          <Stack />
+          <LocalFileExplorer />
         </section>
 
         {/* Statistiques des fichiers */}

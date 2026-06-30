@@ -1,4 +1,15 @@
 // app/r&d/devhelp/page.tsx
+
+//type :  
+/*role : */              
+/*fonctionnement : */ 
+//imports [] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+
+
 'use client'
 
 import React, { useState } from 'react'
@@ -153,6 +164,8 @@ import {
   Beaker as BeakerIcon,
 } from 'lucide-react'
 import HelpCommmande from './HelpCommande'
+import GraphiqueChart from './GraphiqueChart'
+import ChartSample from './ChartSample'
 
 // ==================== TYPES ====================
 
@@ -835,7 +848,14 @@ function DevHelpPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 p-6">
-      <section><HelpCommmande /></section>
+     
+     <section><GraphiqueChart/>
+     </section> 
+     <section><HelpCommmande /></section>
+     <section>
+      <ChartSample />
+     </section>
+
       
       <div className="max-w-7xl mx-auto">
         

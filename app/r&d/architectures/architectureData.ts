@@ -1,5 +1,15 @@
 // @/app/r&d/architectures/architectureData.ts
 
+//type : data 
+/*role : presenter des fichier*/              
+/*fonctionnement : */ 
+//imports [] 
+//exports [interface File, const files (tableau)] 
+//useby [architectutres/page.tsx]
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+/*a suprimer ? */
+
 export interface File {
   id: string;
   type: 'layout' | 'page' | 'composant' | 'lib' | 'utils' | 'next' | 'store' | 'api' | 'config' | 'middleware' | 'schema' | 'action';

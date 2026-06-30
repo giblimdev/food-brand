@@ -1,307 +1,415 @@
-// @/app/auth/register/page.tsx
-"use client";
+// app/auth/register/page.tsx
+//type : page 
+/*role : formulaire d'inscription*/              
+/*fonctionnement : 
+afiche les champs necesssaire a Better Auth, deux champ mot de pass, verifie la concordance. 
+afficher masquer les mots de pass
+casse a cocher condition génral
+redirection en cas de succer*/ 
+//imports [@/lib/auth/auth-client, sonner] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
 
-import { useState, useRef } from "react";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { toast } from "sonner";
-import { signUp, signIn } from "@/lib/auth/auth-client";
-import { Eye, EyeOff, Lock, Upload, X } from "lucide-react";
-import Image from "next/image";
+
+'use client'
+
+import { authClient } from '@/lib/auth/auth-client'
+import { useState, useRef } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+import { toast } from 'sonner'
+import { 
+  Mail, 
+  Lock, 
+  User, 
+  Loader2, 
+  ArrowRight, 
+  Eye, 
+  EyeOff,
+  Camera,
+  X
+} from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
 
 export default function RegisterPage() {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState(""); // Base64
-  const [imagePreview, setImagePreview] = useState(""); // Pour l'aperçu
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [avatarBase64, setAvatarBase64] = useState<string | null>(null)
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [acceptTerms, setAcceptTerms] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      // Vérifier la taille de l'image (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('L\'image ne doit pas dépasser 5MB')
+        return
+      }
 
-  const [loading, setLoading] = useState(false);
-  
-  const fileInputRef = useRef<HTMLInputElement>(null);
+      // Vérifier le type de l'image
+      if (!file.type.startsWith('image/')) {
+        toast.error('Veuillez sélectionner une image valide')
+        return
+      }
 
-  // ✅ Conversion de l'image en base64
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Vérifier le type
-    if (!file.type.startsWith("image/")) {
-      toast.error("Veuillez sélectionner une image valide");
-      return;
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const base64String = reader.result as string
+        setAvatarBase64(base64String)
+        setAvatarPreview(base64String)
+        toast.success('Photo de profil ajoutée')
+      }
+      reader.onerror = () => {
+        toast.error('Erreur lors du chargement de l\'image')
+      }
+      reader.readAsDataURL(file)
     }
+  }
 
-    // Vérifier la taille (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("L'image est trop grande (max 5MB)");
-      return;
-    }
-
-    const reader = new FileReader();
-    
-    reader.onloadend = () => {
-      const base64String = reader.result as string;
-      setImage(base64String);
-      setImagePreview(base64String);
-    };
-
-    reader.onerror = () => {
-      toast.error("Erreur lors de la lecture de l'image");
-    };
-
-    reader.readAsDataURL(file);
-  };
-
-  // ✅ Supprimer l'image
-  const handleRemoveImage = () => {
-    setImage("");
-    setImagePreview("");
+  const removeAvatar = () => {
+    setAvatarBase64(null)
+    setAvatarPreview(null)
     if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+      fileInputRef.current.value = ''
     }
-  };
+    toast.info('Photo de profil supprimée')
+  }
 
   const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
+    
+    // Validation des champs
+    if (!name.trim()) {
+      toast.error('Veuillez entrer votre nom complet')
+      return
+    }
 
-    if (password !== passwordConfirm) {
-      toast.error("Les mots de passe ne correspondent pas.");
-      return;
+    if (!email.trim()) {
+      toast.error('Veuillez entrer votre adresse email')
+      return
     }
 
     if (password.length < 8) {
-      toast.error("Le mot de passe doit contenir au moins 8 caractères");
-      return;
+      toast.error('Le mot de passe doit contenir au moins 8 caractères')
+      return
     }
 
-    setLoading(true);
+    if (password !== confirmPassword) {
+      toast.error('Les mots de passe ne correspondent pas')
+      return
+    }
+
+    if (!acceptTerms) {
+      toast.error('Vous devez accepter les conditions d\'utilisation')
+      return
+    }
+
+    setLoading(true)
 
     try {
-      const { error } = await signUp.email({
-        name,
-        email,
+      // Création du compte via Better Auth
+      const result = await authClient.signUp.email({
+        name: name.trim(),
+        email: email.trim(),
         password,
-        image: image.trim() ? image.trim() : undefined,
-      });
+        // Ajouter l'image en base64 si présente
+        image: avatarBase64 || undefined,
+      })
 
-      setLoading(false);
-
-      if (error) {
-        toast.error(error.message);
-      } else {
-        toast.success("Compte créé avec succès !");
-        setTimeout(() => (window.location.href = "/"), 800);
+      if (result.error) {
+        toast.error(result.error.message || 'Erreur lors de l\'inscription')
+        setLoading(false)
+        return
       }
-    } catch (err: unknown) {
-      setLoading(false);
-      const message = err instanceof Error ? err.message : "Erreur lors de l'inscription";
-      toast.error(message);
-    }
-  };
 
-  const handleSocial = async (provider: "github" | "google") => {
-    try {
-      await signIn.social({ provider });
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Erreur OAuth";
-      toast.error(message);
+      toast.success('Compte créé avec succès !', {
+        description: 'Vous pouvez maintenant vous connecter',
+        duration: 5000,
+      })
+
+      // Rediriger vers la page de connexion après 1.5s
+      setTimeout(() => {
+        router.push('/auth/login')
+      }, 1500)
+
+    } catch (err) {
+      console.error('Erreur d\'inscription:', err)
+      toast.error('Une erreur est survenue lors de l\'inscription')
     }
-  };
+
+    setLoading(false)
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl"
-      >
-        <h1 className="text-2xl font-semibold text-center mb-6 text-gray-900 dark:text-gray-100">
-          Créer un compte
-        </h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 relative overflow-hidden">
+      {/* Effets de fond animés */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-fuchsia-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000"></div>
+      </div>
 
-        <form onSubmit={handleRegister} className="space-y-4">
-          {/* Nom */}
-          <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
-              Nom complet
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="Jean Dupont"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
+      <div className="w-full max-w-[420px] relative z-10">
+        {/* Logo */}
+        <div className="flex justify-center mb-6">
+          <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-500 to-fuchsia-500 flex items-center justify-center shadow-2xl shadow-fuchsia-500/40">
+            <span className="text-2xl font-bold text-white">F</span>
           </div>
+        </div>
 
-          {/* Upload Image */}
-          <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
-              Photo de profil (optionnel)
-            </label>
-            
-            {imagePreview ? (
-              <div className="relative w-full h-32 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden border-2 border-gray-300 dark:border-gray-600">
-                <Image
-                  src={imagePreview}
-                  alt="Aperçu"
-                  fill
-                  className="object-cover"
-                />
+        {/* Titre */}
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-white">
+            Créer un compte
+          </h1>
+          <p className="text-gray-300 mt-1.5">
+            Rejoignez-nous et commencez dès maintenant
+          </p>
+        </div>
+
+        {/* Formulaire */}
+        <form onSubmit={handleRegister} className="space-y-4">
+          {/* Avatar */}
+          <div className="flex justify-center">
+            <div className="relative">
+              <div 
+                className="h-24 w-24 rounded-full bg-gradient-to-br from-blue-500/20 to-fuchsia-500/20 border-2 border-dashed border-white/30 flex items-center justify-center overflow-hidden cursor-pointer hover:border-fuchsia-400 transition-all group"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                {avatarPreview ? (
+                  <Image
+                    src={avatarPreview}
+                    alt="Avatar"
+                    width={96}
+                    height={96}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center gap-1">
+                    <Camera className="h-6 w-6 text-gray-400 group-hover:text-fuchsia-400 transition-colors" />
+                    <span className="text-[10px] text-gray-400 group-hover:text-fuchsia-400 transition-colors">
+                      Ajouter
+                    </span>
+                  </div>
+                )}
+              </div>
+              {avatarPreview && (
                 <button
                   type="button"
-                  onClick={handleRemoveImage}
-                  className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition"
-                  aria-label="Supprimer l'image"
+                  onClick={removeAvatar}
+                  className="absolute -top-1 -right-1 bg-red-500 rounded-full p-1 hover:bg-red-600 transition-colors shadow-lg"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="h-4 w-4 text-white" />
                 </button>
-              </div>
-            ) : (
-              <div
-                onClick={() => fileInputRef.current?.click()}
-                className="w-full h-32 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-indigo-500 transition"
-              >
-                <Upload className="w-8 h-8 text-gray-400 mb-2" />
-                <span className="text-sm text-gray-500 dark:text-gray-400">
-                  Cliquez pour choisir une image
-                </span>
-                <span className="text-xs text-gray-400 dark:text-gray-500">
-                  Max 5MB - JPG, PNG, GIF
-                </span>
-              </div>
-            )}
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarChange}
+                className="hidden"
+                disabled={loading}
+              />
+            </div>
+          </div>
 
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
+          {/* Nom */}
+          <div>
+            <Label htmlFor="name" className="text-sm font-medium text-gray-200 block mb-1.5">
+              Nom complet
+            </Label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Input
+                id="name"
+                type="text"
+                placeholder="Jean Dupont"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="pl-11 h-11 bg-white/5 backdrop-blur-sm border-white/20 text-white text-base placeholder:text-gray-400 focus:ring-2 focus:ring-fuchsia-500/50 focus:border-fuchsia-500/50 transition-all rounded-xl"
+                required
+                disabled={loading}
+                autoComplete="name"
+              />
+            </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
-              Email
-            </label>
-            <input
-              type="email"
-              required
-              placeholder="jean@exemple.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
+            <Label htmlFor="email" className="text-sm font-medium text-gray-200 block mb-1.5">
+              Adresse email
+            </Label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="exemple@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="pl-11 h-11 bg-white/5 backdrop-blur-sm border-white/20 text-white text-base placeholder:text-gray-400 focus:ring-2 focus:ring-fuchsia-500/50 focus:border-fuchsia-500/50 transition-all rounded-xl"
+                required
+                disabled={loading}
+                autoComplete="email"
+              />
+            </div>
           </div>
 
-          {/* Password */}
+          {/* Mot de passe */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+            <Label htmlFor="password" className="text-sm font-medium text-gray-200 block mb-1.5">
               Mot de passe
-            </label>
+            </Label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <Lock className="h-4 w-4" />
-              </span>
-
-              <input
-                type={showPassword ? "text" : "password"}
-                required
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="pl-11 pr-11 h-11 bg-white/5 backdrop-blur-sm border-white/20 text-white text-base placeholder:text-gray-400 focus:ring-2 focus:ring-fuchsia-500/50 focus:border-fuchsia-500/50 transition-all rounded-xl"
+                required
+                minLength={8}
+                disabled={loading}
+                autoComplete="new-password"
               />
-
               <button
                 type="button"
-                onClick={() => setShowPassword((v) => !v)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition"
-                aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                disabled={loading}
               >
-                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
               </button>
             </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-gray-400 mt-1">
               Minimum 8 caractères
             </p>
           </div>
 
-          {/* Password confirmation */}
+          {/* Confirmation mot de passe */}
           <div>
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+            <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-200 block mb-1.5">
               Confirmer le mot de passe
-            </label>
+            </Label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <Lock className="h-4 w-4" />
-              </span>
-
-              <input
-                type={showPasswordConfirm ? "text" : "password"}
-                required
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Input
+                id="confirmPassword"
+                type={showConfirmPassword ? 'text' : 'password'}
                 placeholder="••••••••"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                className="w-full pl-10 pr-10 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="pl-11 pr-11 h-11 bg-white/5 backdrop-blur-sm border-white/20 text-white text-base placeholder:text-gray-400 focus:ring-2 focus:ring-fuchsia-500/50 focus:border-fuchsia-500/50 transition-all rounded-xl"
+                required
+                disabled={loading}
+                autoComplete="new-password"
               />
-
               <button
                 type="button"
-                onClick={() => setShowPasswordConfirm((v) => !v)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition"
-                aria-label={showPasswordConfirm ? "Masquer la confirmation" : "Afficher la confirmation"}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                disabled={loading}
               >
-                {showPasswordConfirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showConfirmPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
               </button>
             </div>
+            {password && confirmPassword && password !== confirmPassword && (
+              <p className="text-xs text-red-400 mt-1">
+                Les mots de passe ne correspondent pas
+              </p>
+            )}
           </div>
 
-          <button
-            type="submit"
+          {/* Conditions générales */}
+          <div className="flex items-start space-x-2 pt-1">
+            <Checkbox 
+              id="terms" 
+              checked={acceptTerms}
+              onCheckedChange={(checked) => setAcceptTerms(checked as boolean)}
+              required 
+              disabled={loading}
+              className="mt-0.5 border-white/30 data-[state=checked]:bg-fuchsia-500 data-[state=checked]:border-fuchsia-500 h-5 w-5 shrink-0"
+            />
+            <Label htmlFor="terms" className="text-sm text-gray-300 cursor-pointer select-none leading-relaxed">
+              J'ai pris connaissance et j'accepte les{' '}
+              <Link href="/terms" className="text-fuchsia-400 hover:text-fuchsia-300 font-medium hover:underline transition-colors">
+                conditions générales d'utilisation
+              </Link>
+            </Label>
+          </div>
+
+          <Button 
+            type="submit" 
+            className="w-full h-11 bg-gradient-to-r from-blue-500 to-fuchsia-500 hover:from-blue-600 hover:to-fuchsia-600 text-white font-medium text-base shadow-lg shadow-fuchsia-500/30 hover:shadow-fuchsia-500/50 transition-all duration-300 rounded-xl"
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-2.5 rounded-lg font-semibold hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Création..." : "S'inscrire"}
-          </button>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Création en cours...
+              </>
+            ) : (
+              <>
+                Créer mon compte
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </>
+            )}
+          </Button>
         </form>
 
-        <div className="flex items-center my-6 gap-2">
-          <span className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
-          <span className="text-gray-400 dark:text-gray-500 text-sm">ou</span>
-          <span className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
+        {/* Footer */}
+        <div className="mt-6 text-center">
+          <p className="text-gray-300">
+            Déjà un compte ?{' '}
+            <Link 
+              href="/auth/login" 
+              className="font-semibold text-fuchsia-400 hover:text-fuchsia-300 transition-colors"
+            >
+              Se connecter
+            </Link>
+          </p>
         </div>
+      </div>
 
-        <div className="flex flex-col gap-3">
-          <button
-            onClick={() => handleSocial("github")}
-            className="w-full border border-gray-300 dark:border-gray-600 py-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-gray-700 dark:text-gray-300 font-medium"
-          >
-            Continuer avec GitHub
-          </button>
-          <button
-            onClick={() => handleSocial("google")}
-            className="w-full border border-gray-300 dark:border-gray-600 py-2.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition text-gray-700 dark:text-gray-300 font-medium"
-          >
-            Continuer avec Google
-          </button>
-        </div>
-
-        <p className="text-center text-sm mt-6 text-gray-600 dark:text-gray-400">
-          Déjà inscrit ?{" "}
-          <Link href="/auth/signin" className="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium">
-            Connectez-vous
-          </Link>
-        </p>
-      </motion.div>
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.1); }
+        }
+        .animate-pulse {
+          animation: pulse 4s ease-in-out infinite;
+        }
+        .delay-1000 {
+          animation-delay: 1s;
+        }
+        .delay-2000 {
+          animation-delay: 2s;
+        }
+      `}</style>
     </div>
-  );
+  )
 }

@@ -1,9 +1,16 @@
 // R&D/NavRDData.ts
-/*
-Menu des pages R&D
-home features architecture Db stack
-Dev
-*/
+
+
+
+///type : page
+/*role :  */              
+/*fonctionnement : */ 
+//imports [] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+
 import { 
   Home, 
   Star, 
@@ -73,6 +80,14 @@ export const mainNav: NavItemRD[] = [
     icon: Code2,
     children: [] // Prêt pour des sous-pages futures
   },
+    {
+    id: 'senario',
+    label: 'Senarios',
+    href: '/r&d/senario',
+    icon: Code2,
+    children: [] // Prêt pour des sous-pages futures
+  },
+
   {
     id: 'devtools',
     label: 'DevTools',

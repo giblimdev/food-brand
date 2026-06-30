@@ -250,7 +250,7 @@ export type BrandOwnerCreateInput = {
   joinedAt?: Date | string
   updatedAt?: Date | string
   brand: Prisma.BrandCreateNestedOneWithoutOwnersInput
-  user: Prisma.UserCreateNestedOneWithoutOwnedBrandsInput
+  user: Prisma.UserCreateNestedOneWithoutBrandOwnersInput
 }
 
 export type BrandOwnerUncheckedCreateInput = {
@@ -268,7 +268,7 @@ export type BrandOwnerUpdateInput = {
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brand?: Prisma.BrandUpdateOneRequiredWithoutOwnersNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutOwnedBrandsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBrandOwnersNestedInput
 }
 
 export type BrandOwnerUncheckedUpdateInput = {
@@ -494,7 +494,7 @@ export type BrandOwnerCreateWithoutBrandInput = {
   role?: $Enums.OwnerRole
   joinedAt?: Date | string
   updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutOwnedBrandsInput
+  user: Prisma.UserCreateNestedOneWithoutBrandOwnersInput
 }
 
 export type BrandOwnerUncheckedCreateWithoutBrandInput = {
@@ -576,7 +576,7 @@ export type BrandOwnerUpdateWithoutBrandInput = {
   role?: Prisma.EnumOwnerRoleFieldUpdateOperationsInput | $Enums.OwnerRole
   joinedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutOwnedBrandsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBrandOwnersNestedInput
 }
 
 export type BrandOwnerUncheckedUpdateWithoutBrandInput = {

@@ -50,6 +50,7 @@ export type RecipeMinAggregateOutputType = {
   isAvailable: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  menuCategory: $Enums.MenuCategory | null
 }
 
 export type RecipeMaxAggregateOutputType = {
@@ -66,6 +67,7 @@ export type RecipeMaxAggregateOutputType = {
   isAvailable: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  menuCategory: $Enums.MenuCategory | null
 }
 
 export type RecipeCountAggregateOutputType = {
@@ -82,6 +84,7 @@ export type RecipeCountAggregateOutputType = {
   isAvailable: number
   createdAt: number
   updatedAt: number
+  menuCategory: number
   _all: number
 }
 
@@ -110,6 +113,7 @@ export type RecipeMinAggregateInputType = {
   isAvailable?: true
   createdAt?: true
   updatedAt?: true
+  menuCategory?: true
 }
 
 export type RecipeMaxAggregateInputType = {
@@ -126,6 +130,7 @@ export type RecipeMaxAggregateInputType = {
   isAvailable?: true
   createdAt?: true
   updatedAt?: true
+  menuCategory?: true
 }
 
 export type RecipeCountAggregateInputType = {
@@ -142,6 +147,7 @@ export type RecipeCountAggregateInputType = {
   isAvailable?: true
   createdAt?: true
   updatedAt?: true
+  menuCategory?: true
   _all?: true
 }
 
@@ -245,6 +251,7 @@ export type RecipeGroupByOutputType = {
   isAvailable: boolean
   createdAt: Date
   updatedAt: Date
+  menuCategory: $Enums.MenuCategory
   _count: RecipeCountAggregateOutputType | null
   _avg: RecipeAvgAggregateOutputType | null
   _sum: RecipeSumAggregateOutputType | null
@@ -284,8 +291,17 @@ export type RecipeWhereInput = {
   isAvailable?: Prisma.BoolFilter<"Recipe"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFilter<"Recipe"> | $Enums.MenuCategory
   brand?: Prisma.XOR<Prisma.BrandScalarRelationFilter, Prisma.BrandWhereInput>
   restaurant?: Prisma.XOR<Prisma.RestaurantNullableScalarRelationFilter, Prisma.RestaurantWhereInput> | null
+  recipeIngredients?: Prisma.RecipeIngredientListRelationFilter
+  cartItems?: Prisma.CartItemListRelationFilter
+  orderItems?: Prisma.OrderItemListRelationFilter
+  promotions?: Prisma.PromotionListRelationFilter
+  option?: Prisma.OptionListRelationFilter
+  tag?: Prisma.TagListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  galleries?: Prisma.GalleryListRelationFilter
 }
 
 export type RecipeOrderByWithRelationInput = {
@@ -302,8 +318,17 @@ export type RecipeOrderByWithRelationInput = {
   isAvailable?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  menuCategory?: Prisma.SortOrder
   brand?: Prisma.BrandOrderByWithRelationInput
   restaurant?: Prisma.RestaurantOrderByWithRelationInput
+  recipeIngredients?: Prisma.RecipeIngredientOrderByRelationAggregateInput
+  cartItems?: Prisma.CartItemOrderByRelationAggregateInput
+  orderItems?: Prisma.OrderItemOrderByRelationAggregateInput
+  promotions?: Prisma.PromotionOrderByRelationAggregateInput
+  option?: Prisma.OptionOrderByRelationAggregateInput
+  tag?: Prisma.TagOrderByRelationAggregateInput
+  favorites?: Prisma.FavoriteOrderByRelationAggregateInput
+  galleries?: Prisma.GalleryOrderByRelationAggregateInput
 }
 
 export type RecipeWhereUniqueInput = Prisma.AtLeast<{
@@ -323,8 +348,17 @@ export type RecipeWhereUniqueInput = Prisma.AtLeast<{
   isAvailable?: Prisma.BoolFilter<"Recipe"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFilter<"Recipe"> | $Enums.MenuCategory
   brand?: Prisma.XOR<Prisma.BrandScalarRelationFilter, Prisma.BrandWhereInput>
   restaurant?: Prisma.XOR<Prisma.RestaurantNullableScalarRelationFilter, Prisma.RestaurantWhereInput> | null
+  recipeIngredients?: Prisma.RecipeIngredientListRelationFilter
+  cartItems?: Prisma.CartItemListRelationFilter
+  orderItems?: Prisma.OrderItemListRelationFilter
+  promotions?: Prisma.PromotionListRelationFilter
+  option?: Prisma.OptionListRelationFilter
+  tag?: Prisma.TagListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  galleries?: Prisma.GalleryListRelationFilter
 }, "id">
 
 export type RecipeOrderByWithAggregationInput = {
@@ -341,6 +375,7 @@ export type RecipeOrderByWithAggregationInput = {
   isAvailable?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  menuCategory?: Prisma.SortOrder
   _count?: Prisma.RecipeCountOrderByAggregateInput
   _avg?: Prisma.RecipeAvgOrderByAggregateInput
   _max?: Prisma.RecipeMaxOrderByAggregateInput
@@ -365,6 +400,7 @@ export type RecipeScalarWhereWithAggregatesInput = {
   isAvailable?: Prisma.BoolWithAggregatesFilter<"Recipe"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Recipe"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Recipe"> | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryWithAggregatesFilter<"Recipe"> | $Enums.MenuCategory
 }
 
 export type RecipeCreateInput = {
@@ -379,8 +415,17 @@ export type RecipeCreateInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
   brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
   restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
 }
 
 export type RecipeUncheckedCreateInput = {
@@ -397,6 +442,15 @@ export type RecipeUncheckedCreateInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
 }
 
 export type RecipeUpdateInput = {
@@ -411,8 +465,17 @@ export type RecipeUpdateInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
   brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
   restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
 }
 
 export type RecipeUncheckedUpdateInput = {
@@ -429,6 +492,15 @@ export type RecipeUncheckedUpdateInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
 }
 
 export type RecipeCreateManyInput = {
@@ -445,6 +517,7 @@ export type RecipeCreateManyInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
 }
 
 export type RecipeUpdateManyMutationInput = {
@@ -459,6 +532,7 @@ export type RecipeUpdateManyMutationInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
 }
 
 export type RecipeUncheckedUpdateManyInput = {
@@ -475,6 +549,7 @@ export type RecipeUncheckedUpdateManyInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
 }
 
 export type RecipeListRelationFilter = {
@@ -501,6 +576,7 @@ export type RecipeCountOrderByAggregateInput = {
   isAvailable?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  menuCategory?: Prisma.SortOrder
 }
 
 export type RecipeAvgOrderByAggregateInput = {
@@ -522,6 +598,7 @@ export type RecipeMaxOrderByAggregateInput = {
   isAvailable?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  menuCategory?: Prisma.SortOrder
 }
 
 export type RecipeMinOrderByAggregateInput = {
@@ -538,11 +615,22 @@ export type RecipeMinOrderByAggregateInput = {
   isAvailable?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  menuCategory?: Prisma.SortOrder
 }
 
 export type RecipeSumOrderByAggregateInput = {
   price?: Prisma.SortOrder
   prepTime?: Prisma.SortOrder
+}
+
+export type RecipeScalarRelationFilter = {
+  is?: Prisma.RecipeWhereInput
+  isNot?: Prisma.RecipeWhereInput
+}
+
+export type RecipeNullableScalarRelationFilter = {
+  is?: Prisma.RecipeWhereInput | null
+  isNot?: Prisma.RecipeWhereInput | null
 }
 
 export type RecipeCreateNestedManyWithoutBrandInput = {
@@ -629,12 +717,172 @@ export type RecipeUncheckedUpdateManyWithoutRestaurantNestedInput = {
   deleteMany?: Prisma.RecipeScalarWhereInput | Prisma.RecipeScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type EnumMenuCategoryFieldUpdateOperationsInput = {
+  set?: $Enums.MenuCategory
+}
+
+export type RecipeCreateNestedOneWithoutTagInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutTagInput, Prisma.RecipeUncheckedCreateWithoutTagInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutTagInput
+  connect?: Prisma.RecipeWhereUniqueInput
+}
+
+export type RecipeUpdateOneRequiredWithoutTagNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutTagInput, Prisma.RecipeUncheckedCreateWithoutTagInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutTagInput
+  upsert?: Prisma.RecipeUpsertWithoutTagInput
+  connect?: Prisma.RecipeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RecipeUpdateToOneWithWhereWithoutTagInput, Prisma.RecipeUpdateWithoutTagInput>, Prisma.RecipeUncheckedUpdateWithoutTagInput>
+}
+
+export type RecipeCreateNestedManyWithoutOptionInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutOptionInput, Prisma.RecipeUncheckedCreateWithoutOptionInput> | Prisma.RecipeCreateWithoutOptionInput[] | Prisma.RecipeUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutOptionInput | Prisma.RecipeCreateOrConnectWithoutOptionInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+}
+
+export type RecipeUncheckedCreateNestedManyWithoutOptionInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutOptionInput, Prisma.RecipeUncheckedCreateWithoutOptionInput> | Prisma.RecipeCreateWithoutOptionInput[] | Prisma.RecipeUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutOptionInput | Prisma.RecipeCreateOrConnectWithoutOptionInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+}
+
+export type RecipeUpdateManyWithoutOptionNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutOptionInput, Prisma.RecipeUncheckedCreateWithoutOptionInput> | Prisma.RecipeCreateWithoutOptionInput[] | Prisma.RecipeUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutOptionInput | Prisma.RecipeCreateOrConnectWithoutOptionInput[]
+  upsert?: Prisma.RecipeUpsertWithWhereUniqueWithoutOptionInput | Prisma.RecipeUpsertWithWhereUniqueWithoutOptionInput[]
+  set?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  disconnect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  delete?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  update?: Prisma.RecipeUpdateWithWhereUniqueWithoutOptionInput | Prisma.RecipeUpdateWithWhereUniqueWithoutOptionInput[]
+  updateMany?: Prisma.RecipeUpdateManyWithWhereWithoutOptionInput | Prisma.RecipeUpdateManyWithWhereWithoutOptionInput[]
+  deleteMany?: Prisma.RecipeScalarWhereInput | Prisma.RecipeScalarWhereInput[]
+}
+
+export type RecipeUncheckedUpdateManyWithoutOptionNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutOptionInput, Prisma.RecipeUncheckedCreateWithoutOptionInput> | Prisma.RecipeCreateWithoutOptionInput[] | Prisma.RecipeUncheckedCreateWithoutOptionInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutOptionInput | Prisma.RecipeCreateOrConnectWithoutOptionInput[]
+  upsert?: Prisma.RecipeUpsertWithWhereUniqueWithoutOptionInput | Prisma.RecipeUpsertWithWhereUniqueWithoutOptionInput[]
+  set?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  disconnect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  delete?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  update?: Prisma.RecipeUpdateWithWhereUniqueWithoutOptionInput | Prisma.RecipeUpdateWithWhereUniqueWithoutOptionInput[]
+  updateMany?: Prisma.RecipeUpdateManyWithWhereWithoutOptionInput | Prisma.RecipeUpdateManyWithWhereWithoutOptionInput[]
+  deleteMany?: Prisma.RecipeScalarWhereInput | Prisma.RecipeScalarWhereInput[]
+}
+
+export type RecipeCreateNestedOneWithoutRecipeIngredientsInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutRecipeIngredientsInput, Prisma.RecipeUncheckedCreateWithoutRecipeIngredientsInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutRecipeIngredientsInput
+  connect?: Prisma.RecipeWhereUniqueInput
+}
+
+export type RecipeUpdateOneRequiredWithoutRecipeIngredientsNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutRecipeIngredientsInput, Prisma.RecipeUncheckedCreateWithoutRecipeIngredientsInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutRecipeIngredientsInput
+  upsert?: Prisma.RecipeUpsertWithoutRecipeIngredientsInput
+  connect?: Prisma.RecipeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RecipeUpdateToOneWithWhereWithoutRecipeIngredientsInput, Prisma.RecipeUpdateWithoutRecipeIngredientsInput>, Prisma.RecipeUncheckedUpdateWithoutRecipeIngredientsInput>
+}
+
+export type RecipeCreateNestedOneWithoutCartItemsInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutCartItemsInput, Prisma.RecipeUncheckedCreateWithoutCartItemsInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutCartItemsInput
+  connect?: Prisma.RecipeWhereUniqueInput
+}
+
+export type RecipeUpdateOneRequiredWithoutCartItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutCartItemsInput, Prisma.RecipeUncheckedCreateWithoutCartItemsInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutCartItemsInput
+  upsert?: Prisma.RecipeUpsertWithoutCartItemsInput
+  connect?: Prisma.RecipeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RecipeUpdateToOneWithWhereWithoutCartItemsInput, Prisma.RecipeUpdateWithoutCartItemsInput>, Prisma.RecipeUncheckedUpdateWithoutCartItemsInput>
+}
+
+export type RecipeCreateNestedOneWithoutOrderItemsInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutOrderItemsInput, Prisma.RecipeUncheckedCreateWithoutOrderItemsInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutOrderItemsInput
+  connect?: Prisma.RecipeWhereUniqueInput
+}
+
+export type RecipeUpdateOneRequiredWithoutOrderItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutOrderItemsInput, Prisma.RecipeUncheckedCreateWithoutOrderItemsInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutOrderItemsInput
+  upsert?: Prisma.RecipeUpsertWithoutOrderItemsInput
+  connect?: Prisma.RecipeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RecipeUpdateToOneWithWhereWithoutOrderItemsInput, Prisma.RecipeUpdateWithoutOrderItemsInput>, Prisma.RecipeUncheckedUpdateWithoutOrderItemsInput>
+}
+
+export type RecipeCreateNestedOneWithoutFavoritesInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutFavoritesInput, Prisma.RecipeUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutFavoritesInput
+  connect?: Prisma.RecipeWhereUniqueInput
+}
+
+export type RecipeUpdateOneWithoutFavoritesNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutFavoritesInput, Prisma.RecipeUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutFavoritesInput
+  upsert?: Prisma.RecipeUpsertWithoutFavoritesInput
+  disconnect?: Prisma.RecipeWhereInput | boolean
+  delete?: Prisma.RecipeWhereInput | boolean
+  connect?: Prisma.RecipeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RecipeUpdateToOneWithWhereWithoutFavoritesInput, Prisma.RecipeUpdateWithoutFavoritesInput>, Prisma.RecipeUncheckedUpdateWithoutFavoritesInput>
+}
+
+export type RecipeCreateNestedManyWithoutPromotionsInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutPromotionsInput, Prisma.RecipeUncheckedCreateWithoutPromotionsInput> | Prisma.RecipeCreateWithoutPromotionsInput[] | Prisma.RecipeUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutPromotionsInput | Prisma.RecipeCreateOrConnectWithoutPromotionsInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+}
+
+export type RecipeUncheckedCreateNestedManyWithoutPromotionsInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutPromotionsInput, Prisma.RecipeUncheckedCreateWithoutPromotionsInput> | Prisma.RecipeCreateWithoutPromotionsInput[] | Prisma.RecipeUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutPromotionsInput | Prisma.RecipeCreateOrConnectWithoutPromotionsInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+}
+
+export type RecipeUpdateManyWithoutPromotionsNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutPromotionsInput, Prisma.RecipeUncheckedCreateWithoutPromotionsInput> | Prisma.RecipeCreateWithoutPromotionsInput[] | Prisma.RecipeUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutPromotionsInput | Prisma.RecipeCreateOrConnectWithoutPromotionsInput[]
+  upsert?: Prisma.RecipeUpsertWithWhereUniqueWithoutPromotionsInput | Prisma.RecipeUpsertWithWhereUniqueWithoutPromotionsInput[]
+  set?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  disconnect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  delete?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  update?: Prisma.RecipeUpdateWithWhereUniqueWithoutPromotionsInput | Prisma.RecipeUpdateWithWhereUniqueWithoutPromotionsInput[]
+  updateMany?: Prisma.RecipeUpdateManyWithWhereWithoutPromotionsInput | Prisma.RecipeUpdateManyWithWhereWithoutPromotionsInput[]
+  deleteMany?: Prisma.RecipeScalarWhereInput | Prisma.RecipeScalarWhereInput[]
+}
+
+export type RecipeUncheckedUpdateManyWithoutPromotionsNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutPromotionsInput, Prisma.RecipeUncheckedCreateWithoutPromotionsInput> | Prisma.RecipeCreateWithoutPromotionsInput[] | Prisma.RecipeUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutPromotionsInput | Prisma.RecipeCreateOrConnectWithoutPromotionsInput[]
+  upsert?: Prisma.RecipeUpsertWithWhereUniqueWithoutPromotionsInput | Prisma.RecipeUpsertWithWhereUniqueWithoutPromotionsInput[]
+  set?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  disconnect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  delete?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  connect?: Prisma.RecipeWhereUniqueInput | Prisma.RecipeWhereUniqueInput[]
+  update?: Prisma.RecipeUpdateWithWhereUniqueWithoutPromotionsInput | Prisma.RecipeUpdateWithWhereUniqueWithoutPromotionsInput[]
+  updateMany?: Prisma.RecipeUpdateManyWithWhereWithoutPromotionsInput | Prisma.RecipeUpdateManyWithWhereWithoutPromotionsInput[]
+  deleteMany?: Prisma.RecipeScalarWhereInput | Prisma.RecipeScalarWhereInput[]
+}
+
+export type RecipeCreateNestedOneWithoutGalleriesInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutGalleriesInput, Prisma.RecipeUncheckedCreateWithoutGalleriesInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutGalleriesInput
+  connect?: Prisma.RecipeWhereUniqueInput
+}
+
+export type RecipeUpdateOneWithoutGalleriesNestedInput = {
+  create?: Prisma.XOR<Prisma.RecipeCreateWithoutGalleriesInput, Prisma.RecipeUncheckedCreateWithoutGalleriesInput>
+  connectOrCreate?: Prisma.RecipeCreateOrConnectWithoutGalleriesInput
+  upsert?: Prisma.RecipeUpsertWithoutGalleriesInput
+  disconnect?: Prisma.RecipeWhereInput | boolean
+  delete?: Prisma.RecipeWhereInput | boolean
+  connect?: Prisma.RecipeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RecipeUpdateToOneWithWhereWithoutGalleriesInput, Prisma.RecipeUpdateWithoutGalleriesInput>, Prisma.RecipeUncheckedUpdateWithoutGalleriesInput>
 }
 
 export type RecipeCreateWithoutBrandInput = {
@@ -649,7 +897,16 @@ export type RecipeCreateWithoutBrandInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
   restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
 }
 
 export type RecipeUncheckedCreateWithoutBrandInput = {
@@ -665,6 +922,15 @@ export type RecipeUncheckedCreateWithoutBrandInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
 }
 
 export type RecipeCreateOrConnectWithoutBrandInput = {
@@ -710,6 +976,7 @@ export type RecipeScalarWhereInput = {
   isAvailable?: Prisma.BoolFilter<"Recipe"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Recipe"> | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFilter<"Recipe"> | $Enums.MenuCategory
 }
 
 export type RecipeCreateWithoutRestaurantInput = {
@@ -724,7 +991,16 @@ export type RecipeCreateWithoutRestaurantInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
   brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
 }
 
 export type RecipeUncheckedCreateWithoutRestaurantInput = {
@@ -740,6 +1016,15 @@ export type RecipeUncheckedCreateWithoutRestaurantInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
 }
 
 export type RecipeCreateOrConnectWithoutRestaurantInput = {
@@ -768,6 +1053,816 @@ export type RecipeUpdateManyWithWhereWithoutRestaurantInput = {
   data: Prisma.XOR<Prisma.RecipeUpdateManyMutationInput, Prisma.RecipeUncheckedUpdateManyWithoutRestaurantInput>
 }
 
+export type RecipeCreateWithoutTagInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutTagInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutTagInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutTagInput, Prisma.RecipeUncheckedCreateWithoutTagInput>
+}
+
+export type RecipeUpsertWithoutTagInput = {
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutTagInput, Prisma.RecipeUncheckedUpdateWithoutTagInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutTagInput, Prisma.RecipeUncheckedCreateWithoutTagInput>
+  where?: Prisma.RecipeWhereInput
+}
+
+export type RecipeUpdateToOneWithWhereWithoutTagInput = {
+  where?: Prisma.RecipeWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutTagInput, Prisma.RecipeUncheckedUpdateWithoutTagInput>
+}
+
+export type RecipeUpdateWithoutTagInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutTagInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeCreateWithoutOptionInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutOptionInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutOptionInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutOptionInput, Prisma.RecipeUncheckedCreateWithoutOptionInput>
+}
+
+export type RecipeUpsertWithWhereUniqueWithoutOptionInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutOptionInput, Prisma.RecipeUncheckedUpdateWithoutOptionInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutOptionInput, Prisma.RecipeUncheckedCreateWithoutOptionInput>
+}
+
+export type RecipeUpdateWithWhereUniqueWithoutOptionInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutOptionInput, Prisma.RecipeUncheckedUpdateWithoutOptionInput>
+}
+
+export type RecipeUpdateManyWithWhereWithoutOptionInput = {
+  where: Prisma.RecipeScalarWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateManyMutationInput, Prisma.RecipeUncheckedUpdateManyWithoutOptionInput>
+}
+
+export type RecipeCreateWithoutRecipeIngredientsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutRecipeIngredientsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutRecipeIngredientsInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutRecipeIngredientsInput, Prisma.RecipeUncheckedCreateWithoutRecipeIngredientsInput>
+}
+
+export type RecipeUpsertWithoutRecipeIngredientsInput = {
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutRecipeIngredientsInput, Prisma.RecipeUncheckedUpdateWithoutRecipeIngredientsInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutRecipeIngredientsInput, Prisma.RecipeUncheckedCreateWithoutRecipeIngredientsInput>
+  where?: Prisma.RecipeWhereInput
+}
+
+export type RecipeUpdateToOneWithWhereWithoutRecipeIngredientsInput = {
+  where?: Prisma.RecipeWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutRecipeIngredientsInput, Prisma.RecipeUncheckedUpdateWithoutRecipeIngredientsInput>
+}
+
+export type RecipeUpdateWithoutRecipeIngredientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutRecipeIngredientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeCreateWithoutCartItemsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutCartItemsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutCartItemsInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutCartItemsInput, Prisma.RecipeUncheckedCreateWithoutCartItemsInput>
+}
+
+export type RecipeUpsertWithoutCartItemsInput = {
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutCartItemsInput, Prisma.RecipeUncheckedUpdateWithoutCartItemsInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutCartItemsInput, Prisma.RecipeUncheckedCreateWithoutCartItemsInput>
+  where?: Prisma.RecipeWhereInput
+}
+
+export type RecipeUpdateToOneWithWhereWithoutCartItemsInput = {
+  where?: Prisma.RecipeWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutCartItemsInput, Prisma.RecipeUncheckedUpdateWithoutCartItemsInput>
+}
+
+export type RecipeUpdateWithoutCartItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutCartItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeCreateWithoutOrderItemsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutOrderItemsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutOrderItemsInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutOrderItemsInput, Prisma.RecipeUncheckedCreateWithoutOrderItemsInput>
+}
+
+export type RecipeUpsertWithoutOrderItemsInput = {
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutOrderItemsInput, Prisma.RecipeUncheckedUpdateWithoutOrderItemsInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutOrderItemsInput, Prisma.RecipeUncheckedCreateWithoutOrderItemsInput>
+  where?: Prisma.RecipeWhereInput
+}
+
+export type RecipeUpdateToOneWithWhereWithoutOrderItemsInput = {
+  where?: Prisma.RecipeWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutOrderItemsInput, Prisma.RecipeUncheckedUpdateWithoutOrderItemsInput>
+}
+
+export type RecipeUpdateWithoutOrderItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutOrderItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeCreateWithoutFavoritesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutFavoritesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutFavoritesInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutFavoritesInput, Prisma.RecipeUncheckedCreateWithoutFavoritesInput>
+}
+
+export type RecipeUpsertWithoutFavoritesInput = {
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutFavoritesInput, Prisma.RecipeUncheckedUpdateWithoutFavoritesInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutFavoritesInput, Prisma.RecipeUncheckedCreateWithoutFavoritesInput>
+  where?: Prisma.RecipeWhereInput
+}
+
+export type RecipeUpdateToOneWithWhereWithoutFavoritesInput = {
+  where?: Prisma.RecipeWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutFavoritesInput, Prisma.RecipeUncheckedUpdateWithoutFavoritesInput>
+}
+
+export type RecipeUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeCreateWithoutPromotionsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutPromotionsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutPromotionsInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutPromotionsInput, Prisma.RecipeUncheckedCreateWithoutPromotionsInput>
+}
+
+export type RecipeUpsertWithWhereUniqueWithoutPromotionsInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutPromotionsInput, Prisma.RecipeUncheckedUpdateWithoutPromotionsInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutPromotionsInput, Prisma.RecipeUncheckedCreateWithoutPromotionsInput>
+}
+
+export type RecipeUpdateWithWhereUniqueWithoutPromotionsInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutPromotionsInput, Prisma.RecipeUncheckedUpdateWithoutPromotionsInput>
+}
+
+export type RecipeUpdateManyWithWhereWithoutPromotionsInput = {
+  where: Prisma.RecipeScalarWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateManyMutationInput, Prisma.RecipeUncheckedUpdateManyWithoutPromotionsInput>
+}
+
+export type RecipeCreateWithoutGalleriesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  brand: Prisma.BrandCreateNestedOneWithoutRecipesInput
+  restaurant?: Prisma.RestaurantCreateNestedOneWithoutRecipesInput
+  recipeIngredients?: Prisma.RecipeIngredientCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeUncheckedCreateWithoutGalleriesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  ingredients?: string | null
+  instructions?: string | null
+  price?: number | null
+  prepTime?: number | null
+  image?: string | null
+  brandId: string
+  restaurantId?: string | null
+  isAvailable?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedCreateNestedManyWithoutRecipeInput
+  cartItems?: Prisma.CartItemUncheckedCreateNestedManyWithoutRecipeInput
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutRecipeInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutRecipesInput
+  option?: Prisma.OptionUncheckedCreateNestedManyWithoutRecipesInput
+  tag?: Prisma.TagUncheckedCreateNestedManyWithoutRecipeInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutRecipeInput
+}
+
+export type RecipeCreateOrConnectWithoutGalleriesInput = {
+  where: Prisma.RecipeWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutGalleriesInput, Prisma.RecipeUncheckedCreateWithoutGalleriesInput>
+}
+
+export type RecipeUpsertWithoutGalleriesInput = {
+  update: Prisma.XOR<Prisma.RecipeUpdateWithoutGalleriesInput, Prisma.RecipeUncheckedUpdateWithoutGalleriesInput>
+  create: Prisma.XOR<Prisma.RecipeCreateWithoutGalleriesInput, Prisma.RecipeUncheckedCreateWithoutGalleriesInput>
+  where?: Prisma.RecipeWhereInput
+}
+
+export type RecipeUpdateToOneWithWhereWithoutGalleriesInput = {
+  where?: Prisma.RecipeWhereInput
+  data: Prisma.XOR<Prisma.RecipeUpdateWithoutGalleriesInput, Prisma.RecipeUncheckedUpdateWithoutGalleriesInput>
+}
+
+export type RecipeUpdateWithoutGalleriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutGalleriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
 export type RecipeCreateManyBrandInput = {
   id?: string
   name: string
@@ -781,6 +1876,7 @@ export type RecipeCreateManyBrandInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
 }
 
 export type RecipeUpdateWithoutBrandInput = {
@@ -795,7 +1891,16 @@ export type RecipeUpdateWithoutBrandInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
   restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
 }
 
 export type RecipeUncheckedUpdateWithoutBrandInput = {
@@ -811,6 +1916,15 @@ export type RecipeUncheckedUpdateWithoutBrandInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
 }
 
 export type RecipeUncheckedUpdateManyWithoutBrandInput = {
@@ -826,6 +1940,7 @@ export type RecipeUncheckedUpdateManyWithoutBrandInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
 }
 
 export type RecipeCreateManyRestaurantInput = {
@@ -841,6 +1956,7 @@ export type RecipeCreateManyRestaurantInput = {
   isAvailable?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  menuCategory: $Enums.MenuCategory
 }
 
 export type RecipeUpdateWithoutRestaurantInput = {
@@ -855,7 +1971,16 @@ export type RecipeUpdateWithoutRestaurantInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
   brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
 }
 
 export type RecipeUncheckedUpdateWithoutRestaurantInput = {
@@ -871,6 +1996,15 @@ export type RecipeUncheckedUpdateWithoutRestaurantInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
 }
 
 export type RecipeUncheckedUpdateManyWithoutRestaurantInput = {
@@ -886,8 +2020,231 @@ export type RecipeUncheckedUpdateManyWithoutRestaurantInput = {
   isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
 }
 
+export type RecipeUpdateWithoutOptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutOptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateManyWithoutOptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+}
+
+export type RecipeUpdateWithoutPromotionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  brand?: Prisma.BrandUpdateOneRequiredWithoutRecipesNestedInput
+  restaurant?: Prisma.RestaurantUpdateOneWithoutRecipesNestedInput
+  recipeIngredients?: Prisma.RecipeIngredientUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutRecipeNestedInput
+  option?: Prisma.OptionUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateWithoutPromotionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+  recipeIngredients?: Prisma.RecipeIngredientUncheckedUpdateManyWithoutRecipeNestedInput
+  cartItems?: Prisma.CartItemUncheckedUpdateManyWithoutRecipeNestedInput
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutRecipeNestedInput
+  option?: Prisma.OptionUncheckedUpdateManyWithoutRecipesNestedInput
+  tag?: Prisma.TagUncheckedUpdateManyWithoutRecipeNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutRecipeNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutRecipeNestedInput
+}
+
+export type RecipeUncheckedUpdateManyWithoutPromotionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingredients?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instructions?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  prepTime?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brandId?: Prisma.StringFieldUpdateOperationsInput | string
+  restaurantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isAvailable?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  menuCategory?: Prisma.EnumMenuCategoryFieldUpdateOperationsInput | $Enums.MenuCategory
+}
+
+
+/**
+ * Count Type RecipeCountOutputType
+ */
+
+export type RecipeCountOutputType = {
+  recipeIngredients: number
+  cartItems: number
+  orderItems: number
+  promotions: number
+  option: number
+  tag: number
+  favorites: number
+  galleries: number
+}
+
+export type RecipeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  recipeIngredients?: boolean | RecipeCountOutputTypeCountRecipeIngredientsArgs
+  cartItems?: boolean | RecipeCountOutputTypeCountCartItemsArgs
+  orderItems?: boolean | RecipeCountOutputTypeCountOrderItemsArgs
+  promotions?: boolean | RecipeCountOutputTypeCountPromotionsArgs
+  option?: boolean | RecipeCountOutputTypeCountOptionArgs
+  tag?: boolean | RecipeCountOutputTypeCountTagArgs
+  favorites?: boolean | RecipeCountOutputTypeCountFavoritesArgs
+  galleries?: boolean | RecipeCountOutputTypeCountGalleriesArgs
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RecipeCountOutputType
+   */
+  select?: Prisma.RecipeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountRecipeIngredientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RecipeIngredientWhereInput
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountCartItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CartItemWhereInput
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderItemWhereInput
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountPromotionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromotionWhereInput
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountOptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OptionWhereInput
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountTagArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TagWhereInput
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FavoriteWhereInput
+}
+
+/**
+ * RecipeCountOutputType without action
+ */
+export type RecipeCountOutputTypeCountGalleriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GalleryWhereInput
+}
 
 
 export type RecipeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -904,8 +2261,18 @@ export type RecipeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   isAvailable?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  menuCategory?: boolean
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
   restaurant?: boolean | Prisma.Recipe$restaurantArgs<ExtArgs>
+  recipeIngredients?: boolean | Prisma.Recipe$recipeIngredientsArgs<ExtArgs>
+  cartItems?: boolean | Prisma.Recipe$cartItemsArgs<ExtArgs>
+  orderItems?: boolean | Prisma.Recipe$orderItemsArgs<ExtArgs>
+  promotions?: boolean | Prisma.Recipe$promotionsArgs<ExtArgs>
+  option?: boolean | Prisma.Recipe$optionArgs<ExtArgs>
+  tag?: boolean | Prisma.Recipe$tagArgs<ExtArgs>
+  favorites?: boolean | Prisma.Recipe$favoritesArgs<ExtArgs>
+  galleries?: boolean | Prisma.Recipe$galleriesArgs<ExtArgs>
+  _count?: boolean | Prisma.RecipeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["recipe"]>
 
 export type RecipeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -922,6 +2289,7 @@ export type RecipeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   isAvailable?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  menuCategory?: boolean
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
   restaurant?: boolean | Prisma.Recipe$restaurantArgs<ExtArgs>
 }, ExtArgs["result"]["recipe"]>
@@ -940,6 +2308,7 @@ export type RecipeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   isAvailable?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  menuCategory?: boolean
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
   restaurant?: boolean | Prisma.Recipe$restaurantArgs<ExtArgs>
 }, ExtArgs["result"]["recipe"]>
@@ -958,12 +2327,22 @@ export type RecipeSelectScalar = {
   isAvailable?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  menuCategory?: boolean
 }
 
-export type RecipeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "ingredients" | "instructions" | "price" | "prepTime" | "image" | "brandId" | "restaurantId" | "isAvailable" | "createdAt" | "updatedAt", ExtArgs["result"]["recipe"]>
+export type RecipeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "ingredients" | "instructions" | "price" | "prepTime" | "image" | "brandId" | "restaurantId" | "isAvailable" | "createdAt" | "updatedAt" | "menuCategory", ExtArgs["result"]["recipe"]>
 export type RecipeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
   restaurant?: boolean | Prisma.Recipe$restaurantArgs<ExtArgs>
+  recipeIngredients?: boolean | Prisma.Recipe$recipeIngredientsArgs<ExtArgs>
+  cartItems?: boolean | Prisma.Recipe$cartItemsArgs<ExtArgs>
+  orderItems?: boolean | Prisma.Recipe$orderItemsArgs<ExtArgs>
+  promotions?: boolean | Prisma.Recipe$promotionsArgs<ExtArgs>
+  option?: boolean | Prisma.Recipe$optionArgs<ExtArgs>
+  tag?: boolean | Prisma.Recipe$tagArgs<ExtArgs>
+  favorites?: boolean | Prisma.Recipe$favoritesArgs<ExtArgs>
+  galleries?: boolean | Prisma.Recipe$galleriesArgs<ExtArgs>
+  _count?: boolean | Prisma.RecipeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RecipeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
@@ -979,6 +2358,14 @@ export type $RecipePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     brand: Prisma.$BrandPayload<ExtArgs>
     restaurant: Prisma.$RestaurantPayload<ExtArgs> | null
+    recipeIngredients: Prisma.$RecipeIngredientPayload<ExtArgs>[]
+    cartItems: Prisma.$CartItemPayload<ExtArgs>[]
+    orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
+    promotions: Prisma.$PromotionPayload<ExtArgs>[]
+    option: Prisma.$OptionPayload<ExtArgs>[]
+    tag: Prisma.$TagPayload<ExtArgs>[]
+    favorites: Prisma.$FavoritePayload<ExtArgs>[]
+    galleries: Prisma.$GalleryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -994,6 +2381,7 @@ export type $RecipePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     isAvailable: boolean
     createdAt: Date
     updatedAt: Date
+    menuCategory: $Enums.MenuCategory
   }, ExtArgs["result"]["recipe"]>
   composites: {}
 }
@@ -1390,6 +2778,14 @@ export interface Prisma__RecipeClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   brand<T extends Prisma.BrandDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BrandDefaultArgs<ExtArgs>>): Prisma.Prisma__BrandClient<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   restaurant<T extends Prisma.Recipe$restaurantArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$restaurantArgs<ExtArgs>>): Prisma.Prisma__RestaurantClient<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  recipeIngredients<T extends Prisma.Recipe$recipeIngredientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$recipeIngredientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipeIngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cartItems<T extends Prisma.Recipe$cartItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$cartItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderItems<T extends Prisma.Recipe$orderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promotions<T extends Prisma.Recipe$promotionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$promotionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  option<T extends Prisma.Recipe$optionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$optionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tag<T extends Prisma.Recipe$tagArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$tagArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  favorites<T extends Prisma.Recipe$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  galleries<T extends Prisma.Recipe$galleriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Recipe$galleriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1432,6 +2828,7 @@ export interface RecipeFieldRefs {
   readonly isAvailable: Prisma.FieldRef<"Recipe", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Recipe", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Recipe", 'DateTime'>
+  readonly menuCategory: Prisma.FieldRef<"Recipe", 'MenuCategory'>
 }
     
 
@@ -1849,6 +3246,198 @@ export type Recipe$restaurantArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.RestaurantInclude<ExtArgs> | null
   where?: Prisma.RestaurantWhereInput
+}
+
+/**
+ * Recipe.recipeIngredients
+ */
+export type Recipe$recipeIngredientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RecipeIngredient
+   */
+  select?: Prisma.RecipeIngredientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RecipeIngredient
+   */
+  omit?: Prisma.RecipeIngredientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RecipeIngredientInclude<ExtArgs> | null
+  where?: Prisma.RecipeIngredientWhereInput
+  orderBy?: Prisma.RecipeIngredientOrderByWithRelationInput | Prisma.RecipeIngredientOrderByWithRelationInput[]
+  cursor?: Prisma.RecipeIngredientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RecipeIngredientScalarFieldEnum | Prisma.RecipeIngredientScalarFieldEnum[]
+}
+
+/**
+ * Recipe.cartItems
+ */
+export type Recipe$cartItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CartItem
+   */
+  select?: Prisma.CartItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CartItem
+   */
+  omit?: Prisma.CartItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CartItemInclude<ExtArgs> | null
+  where?: Prisma.CartItemWhereInput
+  orderBy?: Prisma.CartItemOrderByWithRelationInput | Prisma.CartItemOrderByWithRelationInput[]
+  cursor?: Prisma.CartItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CartItemScalarFieldEnum | Prisma.CartItemScalarFieldEnum[]
+}
+
+/**
+ * Recipe.orderItems
+ */
+export type Recipe$orderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderItem
+   */
+  select?: Prisma.OrderItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderItem
+   */
+  omit?: Prisma.OrderItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderItemInclude<ExtArgs> | null
+  where?: Prisma.OrderItemWhereInput
+  orderBy?: Prisma.OrderItemOrderByWithRelationInput | Prisma.OrderItemOrderByWithRelationInput[]
+  cursor?: Prisma.OrderItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderItemScalarFieldEnum | Prisma.OrderItemScalarFieldEnum[]
+}
+
+/**
+ * Recipe.promotions
+ */
+export type Recipe$promotionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Promotion
+   */
+  select?: Prisma.PromotionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Promotion
+   */
+  omit?: Prisma.PromotionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromotionInclude<ExtArgs> | null
+  where?: Prisma.PromotionWhereInput
+  orderBy?: Prisma.PromotionOrderByWithRelationInput | Prisma.PromotionOrderByWithRelationInput[]
+  cursor?: Prisma.PromotionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromotionScalarFieldEnum | Prisma.PromotionScalarFieldEnum[]
+}
+
+/**
+ * Recipe.option
+ */
+export type Recipe$optionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Option
+   */
+  select?: Prisma.OptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Option
+   */
+  omit?: Prisma.OptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OptionInclude<ExtArgs> | null
+  where?: Prisma.OptionWhereInput
+  orderBy?: Prisma.OptionOrderByWithRelationInput | Prisma.OptionOrderByWithRelationInput[]
+  cursor?: Prisma.OptionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OptionScalarFieldEnum | Prisma.OptionScalarFieldEnum[]
+}
+
+/**
+ * Recipe.tag
+ */
+export type Recipe$tagArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Tag
+   */
+  select?: Prisma.TagSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Tag
+   */
+  omit?: Prisma.TagOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TagInclude<ExtArgs> | null
+  where?: Prisma.TagWhereInput
+  orderBy?: Prisma.TagOrderByWithRelationInput | Prisma.TagOrderByWithRelationInput[]
+  cursor?: Prisma.TagWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TagScalarFieldEnum | Prisma.TagScalarFieldEnum[]
+}
+
+/**
+ * Recipe.favorites
+ */
+export type Recipe$favoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Favorite
+   */
+  select?: Prisma.FavoriteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Favorite
+   */
+  omit?: Prisma.FavoriteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FavoriteInclude<ExtArgs> | null
+  where?: Prisma.FavoriteWhereInput
+  orderBy?: Prisma.FavoriteOrderByWithRelationInput | Prisma.FavoriteOrderByWithRelationInput[]
+  cursor?: Prisma.FavoriteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FavoriteScalarFieldEnum | Prisma.FavoriteScalarFieldEnum[]
+}
+
+/**
+ * Recipe.galleries
+ */
+export type Recipe$galleriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Gallery
+   */
+  select?: Prisma.GallerySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Gallery
+   */
+  omit?: Prisma.GalleryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GalleryInclude<ExtArgs> | null
+  where?: Prisma.GalleryWhereInput
+  orderBy?: Prisma.GalleryOrderByWithRelationInput | Prisma.GalleryOrderByWithRelationInput[]
+  cursor?: Prisma.GalleryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GalleryScalarFieldEnum | Prisma.GalleryScalarFieldEnum[]
 }
 
 /**

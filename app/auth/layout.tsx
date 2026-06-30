@@ -1,4 +1,14 @@
 // @/app/(auth)/layout.tsx
+//type : page 
+/*role : */              
+/*fonctionnement : */ 
+//imports [] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+
+
 import { Toaster } from "sonner";
 
 export default function AuthLayout({

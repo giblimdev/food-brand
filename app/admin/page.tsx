@@ -1,9 +1,31 @@
+//@/app/amin/page.tsx
+
+//type : page 
+/*role : page d'entré admin vers
+gestion des utilisateur (attribution du role admin)
+daschbord : (a developper) 
+chart restaurent point de vent (pos), 
+gestion des catégorie et enum(visualisation),
+communication BtB
+*/              
+/*fonctionnement : 
+verifie le role de l'utilisateur (ne âs implementer pour l'instant)
+*/ 
+//imports [] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+
+
 import React from 'react'
 
 function page() {
   return (
     <div>page admin
-        <section>Catégories principales suggérées :Type of Brand
+        <section>
+          
+          Catégories principales suggérées :Type of Brand
 Nom affiché dans l’app
 Description / Exemples
 Icône suggérée

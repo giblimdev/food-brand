@@ -246,7 +246,7 @@ export type GlossaryCreateInput = {
   definition: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutGlossaryInput
+  creator: Prisma.UserCreateNestedOneWithoutGlossariesInput
 }
 
 export type GlossaryUncheckedCreateInput = {
@@ -264,7 +264,7 @@ export type GlossaryUpdateInput = {
   definition?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutGlossaryNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutGlossariesNestedInput
 }
 
 export type GlossaryUncheckedUpdateInput = {

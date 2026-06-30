@@ -30,7 +30,7 @@ export type UserMinAggregateOutputType = {
   email: string | null
   emailVerified: boolean | null
   image: string | null
-  role: $Enums.Role | null
+  role: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -41,7 +41,7 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   emailVerified: boolean | null
   image: string | null
-  role: $Enums.Role | null
+  role: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -171,7 +171,7 @@ export type UserGroupByOutputType = {
   email: string
   emailVerified: boolean
   image: string | null
-  role: $Enums.Role
+  role: string
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -203,14 +203,26 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  role?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  createdBrands?: Prisma.BrandListRelationFilter
-  ownedBrands?: Prisma.BrandOwnerListRelationFilter
-  glossary?: Prisma.GlossaryListRelationFilter
+  accounts?: Prisma.AccountListRelationFilter
+  profile?: Prisma.ProfileListRelationFilter
+  glossaries?: Prisma.GlossaryListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  addresses?: Prisma.AddressListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  drivers?: Prisma.DriverListRelationFilter
+  orderStatusHistories?: Prisma.OrderStatusHistoryListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
+  customers?: Prisma.CustomerListRelationFilter
+  stockMovements?: Prisma.StockMovementListRelationFilter
+  brandOwners?: Prisma.BrandOwnerListRelationFilter
+  brands?: Prisma.BrandListRelationFilter
+  teamMembers?: Prisma.TeamMemberListRelationFilter
+  teams?: Prisma.TeamListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -222,11 +234,23 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accounts?: Prisma.AccountOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
-  createdBrands?: Prisma.BrandOrderByRelationAggregateInput
-  ownedBrands?: Prisma.BrandOwnerOrderByRelationAggregateInput
-  glossary?: Prisma.GlossaryOrderByRelationAggregateInput
+  accounts?: Prisma.AccountOrderByRelationAggregateInput
+  profile?: Prisma.ProfileOrderByRelationAggregateInput
+  glossaries?: Prisma.GlossaryOrderByRelationAggregateInput
+  favorites?: Prisma.FavoriteOrderByRelationAggregateInput
+  addresses?: Prisma.AddressOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  drivers?: Prisma.DriverOrderByRelationAggregateInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryOrderByRelationAggregateInput
+  orders?: Prisma.OrderOrderByRelationAggregateInput
+  customers?: Prisma.CustomerOrderByRelationAggregateInput
+  stockMovements?: Prisma.StockMovementOrderByRelationAggregateInput
+  brandOwners?: Prisma.BrandOwnerOrderByRelationAggregateInput
+  brands?: Prisma.BrandOrderByRelationAggregateInput
+  teamMembers?: Prisma.TeamMemberOrderByRelationAggregateInput
+  teams?: Prisma.TeamOrderByRelationAggregateInput
+  reviews?: Prisma.ReviewOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -238,14 +262,26 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   emailVerified?: Prisma.BoolFilter<"User"> | boolean
   image?: Prisma.StringNullableFilter<"User"> | string | null
-  role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  role?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  createdBrands?: Prisma.BrandListRelationFilter
-  ownedBrands?: Prisma.BrandOwnerListRelationFilter
-  glossary?: Prisma.GlossaryListRelationFilter
+  accounts?: Prisma.AccountListRelationFilter
+  profile?: Prisma.ProfileListRelationFilter
+  glossaries?: Prisma.GlossaryListRelationFilter
+  favorites?: Prisma.FavoriteListRelationFilter
+  addresses?: Prisma.AddressListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  drivers?: Prisma.DriverListRelationFilter
+  orderStatusHistories?: Prisma.OrderStatusHistoryListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
+  customers?: Prisma.CustomerListRelationFilter
+  stockMovements?: Prisma.StockMovementListRelationFilter
+  brandOwners?: Prisma.BrandOwnerListRelationFilter
+  brands?: Prisma.BrandListRelationFilter
+  teamMembers?: Prisma.TeamMemberListRelationFilter
+  teams?: Prisma.TeamListRelationFilter
+  reviews?: Prisma.ReviewListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -271,7 +307,7 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+  role?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -282,14 +318,26 @@ export type UserCreateInput = {
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -298,14 +346,26 @@ export type UserUncheckedCreateInput = {
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserUpdateInput = {
@@ -314,14 +374,26 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -330,14 +402,26 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -346,7 +430,7 @@ export type UserCreateManyInput = {
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -357,7 +441,7 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -368,7 +452,7 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -411,6 +495,21 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserListRelationFilter = {
+  every?: Prisma.UserWhereInput
+  some?: Prisma.UserWhereInput
+  none?: Prisma.UserWhereInput
+}
+
+export type UserOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -423,26 +522,8 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type EnumRoleFieldUpdateOperationsInput = {
-  set?: $Enums.Role
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
-}
-
-export type UserCreateNestedOneWithoutAccountsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
-  upsert?: Prisma.UserUpsertWithoutAccountsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
 export type UserCreateNestedOneWithoutSessionsInput = {
@@ -459,122 +540,284 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
-export type UserCreateNestedOneWithoutGlossaryInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutGlossaryInput, Prisma.UserUncheckedCreateWithoutGlossaryInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGlossaryInput
+export type UserCreateNestedOneWithoutAccountsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutGlossaryNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutGlossaryInput, Prisma.UserUncheckedCreateWithoutGlossaryInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGlossaryInput
-  upsert?: Prisma.UserUpsertWithoutGlossaryInput
+export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+  upsert?: Prisma.UserUpsertWithoutAccountsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGlossaryInput, Prisma.UserUpdateWithoutGlossaryInput>, Prisma.UserUncheckedUpdateWithoutGlossaryInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
-export type UserCreateNestedOneWithoutCreatedBrandsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedBrandsInput, Prisma.UserUncheckedCreateWithoutCreatedBrandsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBrandsInput
+export type UserCreateNestedManyWithoutProfileInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput> | Prisma.UserCreateWithoutProfileInput[] | Prisma.UserUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfileInput | Prisma.UserCreateOrConnectWithoutProfileInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutProfileInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput> | Prisma.UserCreateWithoutProfileInput[] | Prisma.UserUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfileInput | Prisma.UserCreateOrConnectWithoutProfileInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput> | Prisma.UserCreateWithoutProfileInput[] | Prisma.UserUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfileInput | Prisma.UserCreateOrConnectWithoutProfileInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutProfileInput | Prisma.UserUpsertWithWhereUniqueWithoutProfileInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutProfileInput | Prisma.UserUpdateWithWhereUniqueWithoutProfileInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutProfileInput | Prisma.UserUpdateManyWithWhereWithoutProfileInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput> | Prisma.UserCreateWithoutProfileInput[] | Prisma.UserUncheckedCreateWithoutProfileInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProfileInput | Prisma.UserCreateOrConnectWithoutProfileInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutProfileInput | Prisma.UserUpsertWithWhereUniqueWithoutProfileInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutProfileInput | Prisma.UserUpdateWithWhereUniqueWithoutProfileInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutProfileInput | Prisma.UserUpdateManyWithWhereWithoutProfileInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutGlossariesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGlossariesInput, Prisma.UserUncheckedCreateWithoutGlossariesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGlossariesInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutCreatedBrandsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedBrandsInput, Prisma.UserUncheckedCreateWithoutCreatedBrandsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedBrandsInput
-  upsert?: Prisma.UserUpsertWithoutCreatedBrandsInput
+export type UserUpdateOneRequiredWithoutGlossariesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGlossariesInput, Prisma.UserUncheckedCreateWithoutGlossariesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGlossariesInput
+  upsert?: Prisma.UserUpsertWithoutGlossariesInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedBrandsInput, Prisma.UserUpdateWithoutCreatedBrandsInput>, Prisma.UserUncheckedUpdateWithoutCreatedBrandsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGlossariesInput, Prisma.UserUpdateWithoutGlossariesInput>, Prisma.UserUncheckedUpdateWithoutGlossariesInput>
 }
 
-export type UserCreateNestedOneWithoutOwnedBrandsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedBrandsInput, Prisma.UserUncheckedCreateWithoutOwnedBrandsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedBrandsInput
+export type UserCreateNestedOneWithoutTeamsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamsInput, Prisma.UserUncheckedCreateWithoutTeamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutOwnedBrandsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedBrandsInput, Prisma.UserUncheckedCreateWithoutOwnedBrandsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedBrandsInput
-  upsert?: Prisma.UserUpsertWithoutOwnedBrandsInput
+export type UserUpdateOneRequiredWithoutTeamsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamsInput, Prisma.UserUncheckedCreateWithoutTeamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamsInput
+  upsert?: Prisma.UserUpsertWithoutTeamsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedBrandsInput, Prisma.UserUpdateWithoutOwnedBrandsInput>, Prisma.UserUncheckedUpdateWithoutOwnedBrandsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTeamsInput, Prisma.UserUpdateWithoutTeamsInput>, Prisma.UserUncheckedUpdateWithoutTeamsInput>
 }
 
-export type UserCreateWithoutAccountsInput = {
-  id?: string
-  name: string
-  email: string
-  emailVerified?: boolean
-  image?: string | null
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+export type UserCreateNestedOneWithoutTeamMembersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembersInput, Prisma.UserUncheckedCreateWithoutTeamMembersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembersInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUncheckedCreateWithoutAccountsInput = {
-  id?: string
-  name: string
-  email: string
-  emailVerified?: boolean
-  image?: string | null
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+export type UserUpdateOneRequiredWithoutTeamMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembersInput, Prisma.UserUncheckedCreateWithoutTeamMembersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembersInput
+  upsert?: Prisma.UserUpsertWithoutTeamMembersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTeamMembersInput, Prisma.UserUpdateWithoutTeamMembersInput>, Prisma.UserUncheckedUpdateWithoutTeamMembersInput>
 }
 
-export type UserCreateOrConnectWithoutAccountsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+export type UserCreateNestedOneWithoutBrandsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBrandsInput, Prisma.UserUncheckedCreateWithoutBrandsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBrandsInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpsertWithoutAccountsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
-  where?: Prisma.UserWhereInput
+export type UserUpdateOneRequiredWithoutBrandsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBrandsInput, Prisma.UserUncheckedCreateWithoutBrandsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBrandsInput
+  upsert?: Prisma.UserUpsertWithoutBrandsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBrandsInput, Prisma.UserUpdateWithoutBrandsInput>, Prisma.UserUncheckedUpdateWithoutBrandsInput>
 }
 
-export type UserUpdateToOneWithWhereWithoutAccountsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+export type UserCreateNestedOneWithoutBrandOwnersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBrandOwnersInput, Prisma.UserUncheckedCreateWithoutBrandOwnersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBrandOwnersInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateWithoutAccountsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+export type UserUpdateOneRequiredWithoutBrandOwnersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBrandOwnersInput, Prisma.UserUncheckedCreateWithoutBrandOwnersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBrandOwnersInput
+  upsert?: Prisma.UserUpsertWithoutBrandOwnersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBrandOwnersInput, Prisma.UserUpdateWithoutBrandOwnersInput>, Prisma.UserUncheckedUpdateWithoutBrandOwnersInput>
 }
 
-export type UserUncheckedUpdateWithoutAccountsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+export type UserCreateNestedOneWithoutStockMovementsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockMovementsInput, Prisma.UserUncheckedCreateWithoutStockMovementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockMovementsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutStockMovementsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStockMovementsInput, Prisma.UserUncheckedCreateWithoutStockMovementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStockMovementsInput
+  upsert?: Prisma.UserUpsertWithoutStockMovementsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStockMovementsInput, Prisma.UserUpdateWithoutStockMovementsInput>, Prisma.UserUncheckedUpdateWithoutStockMovementsInput>
+}
+
+export type UserCreateNestedOneWithoutCustomersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCustomersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCustomersInput
+  upsert?: Prisma.UserUpsertWithoutCustomersInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCustomersInput, Prisma.UserUpdateWithoutCustomersInput>, Prisma.UserUncheckedUpdateWithoutCustomersInput>
+}
+
+export type UserCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.UserUpsertWithoutOrdersInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrdersInput, Prisma.UserUpdateWithoutOrdersInput>, Prisma.UserUncheckedUpdateWithoutOrdersInput>
+}
+
+export type UserCreateNestedOneWithoutOrderStatusHistoriesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrderStatusHistoriesInput, Prisma.UserUncheckedCreateWithoutOrderStatusHistoriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrderStatusHistoriesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutOrderStatusHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutOrderStatusHistoriesInput, Prisma.UserUncheckedCreateWithoutOrderStatusHistoriesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrderStatusHistoriesInput
+  upsert?: Prisma.UserUpsertWithoutOrderStatusHistoriesInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrderStatusHistoriesInput, Prisma.UserUpdateWithoutOrderStatusHistoriesInput>, Prisma.UserUncheckedUpdateWithoutOrderStatusHistoriesInput>
+}
+
+export type UserCreateNestedManyWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput> | Prisma.UserCreateWithoutReviewsInput[] | Prisma.UserUncheckedCreateWithoutReviewsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput | Prisma.UserCreateOrConnectWithoutReviewsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutReviewsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput> | Prisma.UserCreateWithoutReviewsInput[] | Prisma.UserUncheckedCreateWithoutReviewsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput | Prisma.UserCreateOrConnectWithoutReviewsInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput> | Prisma.UserCreateWithoutReviewsInput[] | Prisma.UserUncheckedCreateWithoutReviewsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput | Prisma.UserCreateOrConnectWithoutReviewsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutReviewsInput | Prisma.UserUpsertWithWhereUniqueWithoutReviewsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutReviewsInput | Prisma.UserUpdateWithWhereUniqueWithoutReviewsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutReviewsInput | Prisma.UserUpdateManyWithWhereWithoutReviewsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput> | Prisma.UserCreateWithoutReviewsInput[] | Prisma.UserUncheckedCreateWithoutReviewsInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewsInput | Prisma.UserCreateOrConnectWithoutReviewsInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutReviewsInput | Prisma.UserUpsertWithWhereUniqueWithoutReviewsInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutReviewsInput | Prisma.UserUpdateWithWhereUniqueWithoutReviewsInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutReviewsInput | Prisma.UserUpdateManyWithWhereWithoutReviewsInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutDriversInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDriversInput, Prisma.UserUncheckedCreateWithoutDriversInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDriversInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutDriversNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDriversInput, Prisma.UserUncheckedCreateWithoutDriversInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDriversInput
+  upsert?: Prisma.UserUpsertWithoutDriversInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDriversInput, Prisma.UserUpdateWithoutDriversInput>, Prisma.UserUncheckedUpdateWithoutDriversInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserCreateNestedOneWithoutAddressesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAddressesInput, Prisma.UserUncheckedCreateWithoutAddressesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAddressesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAddressesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAddressesInput, Prisma.UserUncheckedCreateWithoutAddressesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAddressesInput
+  upsert?: Prisma.UserUpsertWithoutAddressesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAddressesInput, Prisma.UserUpdateWithoutAddressesInput>, Prisma.UserUncheckedUpdateWithoutAddressesInput>
+}
+
+export type UserCreateNestedOneWithoutFavoritesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoritesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutFavoritesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutFavoritesInput
+  upsert?: Prisma.UserUpsertWithoutFavoritesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFavoritesInput, Prisma.UserUpdateWithoutFavoritesInput>, Prisma.UserUncheckedUpdateWithoutFavoritesInput>
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -583,13 +826,25 @@ export type UserCreateWithoutSessionsInput = {
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -598,13 +853,25 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -629,13 +896,25 @@ export type UserUpdateWithoutSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -644,241 +923,2055 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
 }
 
-export type UserCreateWithoutGlossaryInput = {
+export type UserCreateWithoutAccountsInput = {
   id?: string
   name: string
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
 }
 
-export type UserUncheckedCreateWithoutGlossaryInput = {
+export type UserUncheckedCreateWithoutAccountsInput = {
   id?: string
   name: string
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
 }
 
-export type UserCreateOrConnectWithoutGlossaryInput = {
+export type UserCreateOrConnectWithoutAccountsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutGlossaryInput, Prisma.UserUncheckedCreateWithoutGlossaryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
 }
 
-export type UserUpsertWithoutGlossaryInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutGlossaryInput, Prisma.UserUncheckedUpdateWithoutGlossaryInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutGlossaryInput, Prisma.UserUncheckedCreateWithoutGlossaryInput>
+export type UserUpsertWithoutAccountsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutGlossaryInput = {
+export type UserUpdateToOneWithWhereWithoutAccountsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutGlossaryInput, Prisma.UserUncheckedUpdateWithoutGlossaryInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
-export type UserUpdateWithoutGlossaryInput = {
+export type UserUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
 }
 
-export type UserUncheckedUpdateWithoutGlossaryInput = {
+export type UserUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
 }
 
-export type UserCreateWithoutCreatedBrandsInput = {
+export type UserCreateWithoutProfileInput = {
   id?: string
   name: string
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  ownedBrands?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
-}
-
-export type UserUncheckedCreateWithoutCreatedBrandsInput = {
-  id?: string
-  name: string
-  email: string
-  emailVerified?: boolean
-  image?: string | null
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
-  glossary?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
-}
-
-export type UserCreateOrConnectWithoutCreatedBrandsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedBrandsInput, Prisma.UserUncheckedCreateWithoutCreatedBrandsInput>
-}
-
-export type UserUpsertWithoutCreatedBrandsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedBrandsInput, Prisma.UserUncheckedUpdateWithoutCreatedBrandsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedBrandsInput, Prisma.UserUncheckedCreateWithoutCreatedBrandsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutCreatedBrandsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedBrandsInput, Prisma.UserUncheckedUpdateWithoutCreatedBrandsInput>
-}
-
-export type UserUpdateWithoutCreatedBrandsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  ownedBrands?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
-}
-
-export type UserUncheckedUpdateWithoutCreatedBrandsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  ownedBrands?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
-  glossary?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
-}
-
-export type UserCreateWithoutOwnedBrandsInput = {
-  id?: string
-  name: string
-  email: string
-  emailVerified?: boolean
-  image?: string | null
-  role?: $Enums.Role
-  createdAt?: Date | string
-  updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
-  glossary?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
 }
 
-export type UserUncheckedCreateWithoutOwnedBrandsInput = {
+export type UserUncheckedCreateWithoutProfileInput = {
   id?: string
   name: string
   email: string
   emailVerified?: boolean
   image?: string | null
-  role?: $Enums.Role
+  role?: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  createdBrands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
-  glossary?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
 }
 
-export type UserCreateOrConnectWithoutOwnedBrandsInput = {
+export type UserCreateOrConnectWithoutProfileInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedBrandsInput, Prisma.UserUncheckedCreateWithoutOwnedBrandsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput>
 }
 
-export type UserUpsertWithoutOwnedBrandsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutOwnedBrandsInput, Prisma.UserUncheckedUpdateWithoutOwnedBrandsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutOwnedBrandsInput, Prisma.UserUncheckedCreateWithoutOwnedBrandsInput>
+export type UserUpsertWithWhereUniqueWithoutProfileInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProfileInput, Prisma.UserUncheckedUpdateWithoutProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProfileInput, Prisma.UserUncheckedCreateWithoutProfileInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutProfileInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProfileInput, Prisma.UserUncheckedUpdateWithoutProfileInput>
+}
+
+export type UserUpdateManyWithWhereWithoutProfileInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutProfileInput>
+}
+
+export type UserScalarWhereInput = {
+  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  OR?: Prisma.UserScalarWhereInput[]
+  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+  id?: Prisma.StringFilter<"User"> | string
+  name?: Prisma.StringFilter<"User"> | string
+  email?: Prisma.StringFilter<"User"> | string
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.StringFilter<"User"> | string
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+}
+
+export type UserCreateWithoutGlossariesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutGlossariesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutGlossariesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutGlossariesInput, Prisma.UserUncheckedCreateWithoutGlossariesInput>
+}
+
+export type UserUpsertWithoutGlossariesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutGlossariesInput, Prisma.UserUncheckedUpdateWithoutGlossariesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutGlossariesInput, Prisma.UserUncheckedCreateWithoutGlossariesInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutOwnedBrandsInput = {
+export type UserUpdateToOneWithWhereWithoutGlossariesInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutOwnedBrandsInput, Prisma.UserUncheckedUpdateWithoutOwnedBrandsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutGlossariesInput, Prisma.UserUncheckedUpdateWithoutGlossariesInput>
 }
 
-export type UserUpdateWithoutOwnedBrandsInput = {
+export type UserUpdateWithoutGlossariesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
-  glossary?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
 }
 
-export type UserUncheckedUpdateWithoutOwnedBrandsInput = {
+export type UserUncheckedUpdateWithoutGlossariesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  createdBrands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
-  glossary?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutTeamsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutTeamsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutTeamsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeamsInput, Prisma.UserUncheckedCreateWithoutTeamsInput>
+}
+
+export type UserUpsertWithoutTeamsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTeamsInput, Prisma.UserUncheckedUpdateWithoutTeamsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeamsInput, Prisma.UserUncheckedCreateWithoutTeamsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTeamsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTeamsInput, Prisma.UserUncheckedUpdateWithoutTeamsInput>
+}
+
+export type UserUpdateWithoutTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTeamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutTeamMembersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutTeamMembersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutTeamMembersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeamMembersInput, Prisma.UserUncheckedCreateWithoutTeamMembersInput>
+}
+
+export type UserUpsertWithoutTeamMembersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTeamMembersInput, Prisma.UserUncheckedUpdateWithoutTeamMembersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeamMembersInput, Prisma.UserUncheckedCreateWithoutTeamMembersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTeamMembersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTeamMembersInput, Prisma.UserUncheckedUpdateWithoutTeamMembersInput>
+}
+
+export type UserUpdateWithoutTeamMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTeamMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutBrandsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutBrandsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutBrandsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBrandsInput, Prisma.UserUncheckedCreateWithoutBrandsInput>
+}
+
+export type UserUpsertWithoutBrandsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBrandsInput, Prisma.UserUncheckedUpdateWithoutBrandsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBrandsInput, Prisma.UserUncheckedCreateWithoutBrandsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBrandsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBrandsInput, Prisma.UserUncheckedUpdateWithoutBrandsInput>
+}
+
+export type UserUpdateWithoutBrandsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBrandsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutBrandOwnersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutBrandOwnersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutBrandOwnersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBrandOwnersInput, Prisma.UserUncheckedCreateWithoutBrandOwnersInput>
+}
+
+export type UserUpsertWithoutBrandOwnersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBrandOwnersInput, Prisma.UserUncheckedUpdateWithoutBrandOwnersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBrandOwnersInput, Prisma.UserUncheckedCreateWithoutBrandOwnersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBrandOwnersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBrandOwnersInput, Prisma.UserUncheckedUpdateWithoutBrandOwnersInput>
+}
+
+export type UserUpdateWithoutBrandOwnersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBrandOwnersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutStockMovementsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutStockMovementsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutStockMovementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockMovementsInput, Prisma.UserUncheckedCreateWithoutStockMovementsInput>
+}
+
+export type UserUpsertWithoutStockMovementsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStockMovementsInput, Prisma.UserUncheckedUpdateWithoutStockMovementsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStockMovementsInput, Prisma.UserUncheckedCreateWithoutStockMovementsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStockMovementsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStockMovementsInput, Prisma.UserUncheckedUpdateWithoutStockMovementsInput>
+}
+
+export type UserUpdateWithoutStockMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStockMovementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutCustomersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutCustomersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutCustomersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+}
+
+export type UserUpsertWithoutCustomersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCustomersInput, Prisma.UserUncheckedUpdateWithoutCustomersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCustomersInput, Prisma.UserUncheckedCreateWithoutCustomersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCustomersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCustomersInput, Prisma.UserUncheckedUpdateWithoutCustomersInput>
+}
+
+export type UserUpdateWithoutCustomersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCustomersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+}
+
+export type UserUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOrdersInput, Prisma.UserUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrdersInput, Prisma.UserUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOrdersInput, Prisma.UserUncheckedUpdateWithoutOrdersInput>
+}
+
+export type UserUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutOrderStatusHistoriesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutOrderStatusHistoriesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutOrderStatusHistoriesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrderStatusHistoriesInput, Prisma.UserUncheckedCreateWithoutOrderStatusHistoriesInput>
+}
+
+export type UserUpsertWithoutOrderStatusHistoriesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutOrderStatusHistoriesInput, Prisma.UserUncheckedUpdateWithoutOrderStatusHistoriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutOrderStatusHistoriesInput, Prisma.UserUncheckedCreateWithoutOrderStatusHistoriesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutOrderStatusHistoriesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutOrderStatusHistoriesInput, Prisma.UserUncheckedUpdateWithoutOrderStatusHistoriesInput>
+}
+
+export type UserUpdateWithoutOrderStatusHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutOrderStatusHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+}
+
+export type UserUncheckedCreateWithoutReviewsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+}
+
+export type UserCreateOrConnectWithoutReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+}
+
+export type UserUpsertWithWhereUniqueWithoutReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewsInput, Prisma.UserUncheckedCreateWithoutReviewsInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutReviewsInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewsInput, Prisma.UserUncheckedUpdateWithoutReviewsInput>
+}
+
+export type UserUpdateManyWithWhereWithoutReviewsInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutReviewsInput>
+}
+
+export type UserCreateWithoutDriversInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutDriversInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutDriversInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDriversInput, Prisma.UserUncheckedCreateWithoutDriversInput>
+}
+
+export type UserUpsertWithoutDriversInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDriversInput, Prisma.UserUncheckedUpdateWithoutDriversInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDriversInput, Prisma.UserUncheckedCreateWithoutDriversInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDriversInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDriversInput, Prisma.UserUncheckedUpdateWithoutDriversInput>
+}
+
+export type UserUpdateWithoutDriversInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDriversInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+}
+
+export type UserUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutAddressesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutAddressesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutAddressesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAddressesInput, Prisma.UserUncheckedCreateWithoutAddressesInput>
+}
+
+export type UserUpsertWithoutAddressesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAddressesInput, Prisma.UserUncheckedUpdateWithoutAddressesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAddressesInput, Prisma.UserUncheckedCreateWithoutAddressesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAddressesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAddressesInput, Prisma.UserUncheckedUpdateWithoutAddressesInput>
+}
+
+export type UserUpdateWithoutAddressesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAddressesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserCreateWithoutFavoritesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryCreateNestedManyWithoutCreatorInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUsersInput
+}
+
+export type UserUncheckedCreateWithoutFavoritesInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedManyWithoutUsersInput
+  glossaries?: Prisma.GlossaryUncheckedCreateNestedManyWithoutCreatorInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  drivers?: Prisma.DriverUncheckedCreateNestedManyWithoutUserInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  customers?: Prisma.CustomerUncheckedCreateNestedManyWithoutUserInput
+  stockMovements?: Prisma.StockMovementUncheckedCreateNestedManyWithoutCreatedByInput
+  brandOwners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutUserInput
+  brands?: Prisma.BrandUncheckedCreateNestedManyWithoutCreatorInput
+  teamMembers?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  teams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatorInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type UserCreateOrConnectWithoutFavoritesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+}
+
+export type UserUpsertWithoutFavoritesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutFavoritesInput, Prisma.UserUncheckedUpdateWithoutFavoritesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutFavoritesInput, Prisma.UserUncheckedCreateWithoutFavoritesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutFavoritesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutFavoritesInput, Prisma.UserUncheckedUpdateWithoutFavoritesInput>
+}
+
+export type UserUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutFavoritesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUpdateWithoutProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type UserUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateManyWithoutUsersNestedInput
+  glossaries?: Prisma.GlossaryUncheckedUpdateManyWithoutCreatorNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  drivers?: Prisma.DriverUncheckedUpdateManyWithoutUserNestedInput
+  orderStatusHistories?: Prisma.OrderStatusHistoryUncheckedUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  customers?: Prisma.CustomerUncheckedUpdateManyWithoutUserNestedInput
+  stockMovements?: Prisma.StockMovementUncheckedUpdateManyWithoutCreatedByNestedInput
+  brandOwners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutUserNestedInput
+  brands?: Prisma.BrandUncheckedUpdateManyWithoutCreatorNestedInput
+  teamMembers?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  teams?: Prisma.TeamUncheckedUpdateManyWithoutCreatorNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -887,19 +2980,43 @@ export type UserUncheckedUpdateWithoutOwnedBrandsInput = {
  */
 
 export type UserCountOutputType = {
-  accounts: number
   sessions: number
-  createdBrands: number
-  ownedBrands: number
-  glossary: number
+  accounts: number
+  profile: number
+  glossaries: number
+  favorites: number
+  addresses: number
+  notifications: number
+  drivers: number
+  orderStatusHistories: number
+  orders: number
+  customers: number
+  stockMovements: number
+  brandOwners: number
+  brands: number
+  teamMembers: number
+  teams: number
+  reviews: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-  createdBrands?: boolean | UserCountOutputTypeCountCreatedBrandsArgs
-  ownedBrands?: boolean | UserCountOutputTypeCountOwnedBrandsArgs
-  glossary?: boolean | UserCountOutputTypeCountGlossaryArgs
+  accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  profile?: boolean | UserCountOutputTypeCountProfileArgs
+  glossaries?: boolean | UserCountOutputTypeCountGlossariesArgs
+  favorites?: boolean | UserCountOutputTypeCountFavoritesArgs
+  addresses?: boolean | UserCountOutputTypeCountAddressesArgs
+  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+  drivers?: boolean | UserCountOutputTypeCountDriversArgs
+  orderStatusHistories?: boolean | UserCountOutputTypeCountOrderStatusHistoriesArgs
+  orders?: boolean | UserCountOutputTypeCountOrdersArgs
+  customers?: boolean | UserCountOutputTypeCountCustomersArgs
+  stockMovements?: boolean | UserCountOutputTypeCountStockMovementsArgs
+  brandOwners?: boolean | UserCountOutputTypeCountBrandOwnersArgs
+  brands?: boolean | UserCountOutputTypeCountBrandsArgs
+  teamMembers?: boolean | UserCountOutputTypeCountTeamMembersArgs
+  teams?: boolean | UserCountOutputTypeCountTeamsArgs
+  reviews?: boolean | UserCountOutputTypeCountReviewsArgs
 }
 
 /**
@@ -915,13 +3032,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AccountWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SessionWhereInput
 }
@@ -929,22 +3039,113 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountCreatedBrandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BrandWhereInput
+export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountOwnedBrandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type UserCountOutputTypeCountProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProfileWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountGlossariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GlossaryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountFavoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FavoriteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AddressWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDriversArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DriverWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrderStatusHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderStatusHistoryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCustomersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CustomerWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStockMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StockMovementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBrandOwnersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BrandOwnerWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountGlossaryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.GlossaryWhereInput
+export type UserCountOutputTypeCountBrandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BrandWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTeamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamMemberWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReviewWhereInput
 }
 
 
@@ -957,11 +3158,23 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  createdBrands?: boolean | Prisma.User$createdBrandsArgs<ExtArgs>
-  ownedBrands?: boolean | Prisma.User$ownedBrandsArgs<ExtArgs>
-  glossary?: boolean | Prisma.User$glossaryArgs<ExtArgs>
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  glossaries?: boolean | Prisma.User$glossariesArgs<ExtArgs>
+  favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  addresses?: boolean | Prisma.User$addressesArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  drivers?: boolean | Prisma.User$driversArgs<ExtArgs>
+  orderStatusHistories?: boolean | Prisma.User$orderStatusHistoriesArgs<ExtArgs>
+  orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  customers?: boolean | Prisma.User$customersArgs<ExtArgs>
+  stockMovements?: boolean | Prisma.User$stockMovementsArgs<ExtArgs>
+  brandOwners?: boolean | Prisma.User$brandOwnersArgs<ExtArgs>
+  brands?: boolean | Prisma.User$brandsArgs<ExtArgs>
+  teamMembers?: boolean | Prisma.User$teamMembersArgs<ExtArgs>
+  teams?: boolean | Prisma.User$teamsArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1000,11 +3213,23 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  createdBrands?: boolean | Prisma.User$createdBrandsArgs<ExtArgs>
-  ownedBrands?: boolean | Prisma.User$ownedBrandsArgs<ExtArgs>
-  glossary?: boolean | Prisma.User$glossaryArgs<ExtArgs>
+  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  glossaries?: boolean | Prisma.User$glossariesArgs<ExtArgs>
+  favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
+  addresses?: boolean | Prisma.User$addressesArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  drivers?: boolean | Prisma.User$driversArgs<ExtArgs>
+  orderStatusHistories?: boolean | Prisma.User$orderStatusHistoriesArgs<ExtArgs>
+  orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
+  customers?: boolean | Prisma.User$customersArgs<ExtArgs>
+  stockMovements?: boolean | Prisma.User$stockMovementsArgs<ExtArgs>
+  brandOwners?: boolean | Prisma.User$brandOwnersArgs<ExtArgs>
+  brands?: boolean | Prisma.User$brandsArgs<ExtArgs>
+  teamMembers?: boolean | Prisma.User$teamMembersArgs<ExtArgs>
+  teams?: boolean | Prisma.User$teamsArgs<ExtArgs>
+  reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1013,11 +3238,23 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    accounts: Prisma.$AccountPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
-    createdBrands: Prisma.$BrandPayload<ExtArgs>[]
-    ownedBrands: Prisma.$BrandOwnerPayload<ExtArgs>[]
-    glossary: Prisma.$GlossaryPayload<ExtArgs>[]
+    accounts: Prisma.$AccountPayload<ExtArgs>[]
+    profile: Prisma.$ProfilePayload<ExtArgs>[]
+    glossaries: Prisma.$GlossaryPayload<ExtArgs>[]
+    favorites: Prisma.$FavoritePayload<ExtArgs>[]
+    addresses: Prisma.$AddressPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    drivers: Prisma.$DriverPayload<ExtArgs>[]
+    orderStatusHistories: Prisma.$OrderStatusHistoryPayload<ExtArgs>[]
+    orders: Prisma.$OrderPayload<ExtArgs>[]
+    customers: Prisma.$CustomerPayload<ExtArgs>[]
+    stockMovements: Prisma.$StockMovementPayload<ExtArgs>[]
+    brandOwners: Prisma.$BrandOwnerPayload<ExtArgs>[]
+    brands: Prisma.$BrandPayload<ExtArgs>[]
+    teamMembers: Prisma.$TeamMemberPayload<ExtArgs>[]
+    teams: Prisma.$TeamPayload<ExtArgs>[]
+    reviews: Prisma.$ReviewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1025,7 +3262,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     emailVerified: boolean
     image: string | null
-    role: $Enums.Role
+    role: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1422,11 +3659,23 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  createdBrands<T extends Prisma.User$createdBrandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdBrandsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  ownedBrands<T extends Prisma.User$ownedBrandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedBrandsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandOwnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  glossary<T extends Prisma.User$glossaryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$glossaryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GlossaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  profile<T extends Prisma.User$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$profileArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  glossaries<T extends Prisma.User$glossariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$glossariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GlossaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  addresses<T extends Prisma.User$addressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  drivers<T extends Prisma.User$driversArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$driversArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DriverPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orderStatusHistories<T extends Prisma.User$orderStatusHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orderStatusHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  customers<T extends Prisma.User$customersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stockMovements<T extends Prisma.User$stockMovementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$stockMovementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StockMovementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  brandOwners<T extends Prisma.User$brandOwnersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$brandOwnersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandOwnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  brands<T extends Prisma.User$brandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teamMembers<T extends Prisma.User$teamMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teamMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teams<T extends Prisma.User$teamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1461,7 +3710,7 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly image: Prisma.FieldRef<"User", 'String'>
-  readonly role: Prisma.FieldRef<"User", 'Role'>
+  readonly role: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1857,30 +4106,6 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.accounts
- */
-export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Account
-   */
-  select?: Prisma.AccountSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Account
-   */
-  omit?: Prisma.AccountOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AccountInclude<ExtArgs> | null
-  where?: Prisma.AccountWhereInput
-  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
-  cursor?: Prisma.AccountWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
-}
-
-/**
  * User.sessions
  */
 export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1905,33 +4130,273 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.createdBrands
+ * User.accounts
  */
-export type User$createdBrandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Brand
+   * Select specific fields to fetch from the Account
    */
-  select?: Prisma.BrandSelect<ExtArgs> | null
+  select?: Prisma.AccountSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Brand
+   * Omit specific fields from the Account
    */
-  omit?: Prisma.BrandOmit<ExtArgs> | null
+  omit?: Prisma.AccountOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BrandInclude<ExtArgs> | null
-  where?: Prisma.BrandWhereInput
-  orderBy?: Prisma.BrandOrderByWithRelationInput | Prisma.BrandOrderByWithRelationInput[]
-  cursor?: Prisma.BrandWhereUniqueInput
+  include?: Prisma.AccountInclude<ExtArgs> | null
+  where?: Prisma.AccountWhereInput
+  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
+  cursor?: Prisma.AccountWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[]
+  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
 }
 
 /**
- * User.ownedBrands
+ * User.profile
  */
-export type User$ownedBrandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$profileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Profile
+   */
+  select?: Prisma.ProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Profile
+   */
+  omit?: Prisma.ProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProfileInclude<ExtArgs> | null
+  where?: Prisma.ProfileWhereInput
+  orderBy?: Prisma.ProfileOrderByWithRelationInput | Prisma.ProfileOrderByWithRelationInput[]
+  cursor?: Prisma.ProfileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProfileScalarFieldEnum | Prisma.ProfileScalarFieldEnum[]
+}
+
+/**
+ * User.glossaries
+ */
+export type User$glossariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Glossary
+   */
+  select?: Prisma.GlossarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Glossary
+   */
+  omit?: Prisma.GlossaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GlossaryInclude<ExtArgs> | null
+  where?: Prisma.GlossaryWhereInput
+  orderBy?: Prisma.GlossaryOrderByWithRelationInput | Prisma.GlossaryOrderByWithRelationInput[]
+  cursor?: Prisma.GlossaryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GlossaryScalarFieldEnum | Prisma.GlossaryScalarFieldEnum[]
+}
+
+/**
+ * User.favorites
+ */
+export type User$favoritesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Favorite
+   */
+  select?: Prisma.FavoriteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Favorite
+   */
+  omit?: Prisma.FavoriteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FavoriteInclude<ExtArgs> | null
+  where?: Prisma.FavoriteWhereInput
+  orderBy?: Prisma.FavoriteOrderByWithRelationInput | Prisma.FavoriteOrderByWithRelationInput[]
+  cursor?: Prisma.FavoriteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FavoriteScalarFieldEnum | Prisma.FavoriteScalarFieldEnum[]
+}
+
+/**
+ * User.addresses
+ */
+export type User$addressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Address
+   */
+  select?: Prisma.AddressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Address
+   */
+  omit?: Prisma.AddressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AddressInclude<ExtArgs> | null
+  where?: Prisma.AddressWhereInput
+  orderBy?: Prisma.AddressOrderByWithRelationInput | Prisma.AddressOrderByWithRelationInput[]
+  cursor?: Prisma.AddressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AddressScalarFieldEnum | Prisma.AddressScalarFieldEnum[]
+}
+
+/**
+ * User.notifications
+ */
+export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.drivers
+ */
+export type User$driversArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Driver
+   */
+  select?: Prisma.DriverSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Driver
+   */
+  omit?: Prisma.DriverOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DriverInclude<ExtArgs> | null
+  where?: Prisma.DriverWhereInput
+  orderBy?: Prisma.DriverOrderByWithRelationInput | Prisma.DriverOrderByWithRelationInput[]
+  cursor?: Prisma.DriverWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DriverScalarFieldEnum | Prisma.DriverScalarFieldEnum[]
+}
+
+/**
+ * User.orderStatusHistories
+ */
+export type User$orderStatusHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderStatusHistory
+   */
+  select?: Prisma.OrderStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderStatusHistory
+   */
+  omit?: Prisma.OrderStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.OrderStatusHistoryWhereInput
+  orderBy?: Prisma.OrderStatusHistoryOrderByWithRelationInput | Prisma.OrderStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.OrderStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderStatusHistoryScalarFieldEnum | Prisma.OrderStatusHistoryScalarFieldEnum[]
+}
+
+/**
+ * User.orders
+ */
+export type User$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null
+  where?: Prisma.OrderWhereInput
+  orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[]
+  cursor?: Prisma.OrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * User.customers
+ */
+export type User$customersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Customer
+   */
+  select?: Prisma.CustomerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Customer
+   */
+  omit?: Prisma.CustomerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CustomerInclude<ExtArgs> | null
+  where?: Prisma.CustomerWhereInput
+  orderBy?: Prisma.CustomerOrderByWithRelationInput | Prisma.CustomerOrderByWithRelationInput[]
+  cursor?: Prisma.CustomerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CustomerScalarFieldEnum | Prisma.CustomerScalarFieldEnum[]
+}
+
+/**
+ * User.stockMovements
+ */
+export type User$stockMovementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StockMovement
+   */
+  select?: Prisma.StockMovementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StockMovement
+   */
+  omit?: Prisma.StockMovementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StockMovementInclude<ExtArgs> | null
+  where?: Prisma.StockMovementWhereInput
+  orderBy?: Prisma.StockMovementOrderByWithRelationInput | Prisma.StockMovementOrderByWithRelationInput[]
+  cursor?: Prisma.StockMovementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StockMovementScalarFieldEnum | Prisma.StockMovementScalarFieldEnum[]
+}
+
+/**
+ * User.brandOwners
+ */
+export type User$brandOwnersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the BrandOwner
    */
@@ -1953,27 +4418,99 @@ export type User$ownedBrandsArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * User.glossary
+ * User.brands
  */
-export type User$glossaryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$brandsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Glossary
+   * Select specific fields to fetch from the Brand
    */
-  select?: Prisma.GlossarySelect<ExtArgs> | null
+  select?: Prisma.BrandSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Glossary
+   * Omit specific fields from the Brand
    */
-  omit?: Prisma.GlossaryOmit<ExtArgs> | null
+  omit?: Prisma.BrandOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.GlossaryInclude<ExtArgs> | null
-  where?: Prisma.GlossaryWhereInput
-  orderBy?: Prisma.GlossaryOrderByWithRelationInput | Prisma.GlossaryOrderByWithRelationInput[]
-  cursor?: Prisma.GlossaryWhereUniqueInput
+  include?: Prisma.BrandInclude<ExtArgs> | null
+  where?: Prisma.BrandWhereInput
+  orderBy?: Prisma.BrandOrderByWithRelationInput | Prisma.BrandOrderByWithRelationInput[]
+  cursor?: Prisma.BrandWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.GlossaryScalarFieldEnum | Prisma.GlossaryScalarFieldEnum[]
+  distinct?: Prisma.BrandScalarFieldEnum | Prisma.BrandScalarFieldEnum[]
+}
+
+/**
+ * User.teamMembers
+ */
+export type User$teamMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TeamMember
+   */
+  select?: Prisma.TeamMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TeamMember
+   */
+  omit?: Prisma.TeamMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamMemberInclude<ExtArgs> | null
+  where?: Prisma.TeamMemberWhereInput
+  orderBy?: Prisma.TeamMemberOrderByWithRelationInput | Prisma.TeamMemberOrderByWithRelationInput[]
+  cursor?: Prisma.TeamMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamMemberScalarFieldEnum | Prisma.TeamMemberScalarFieldEnum[]
+}
+
+/**
+ * User.teams
+ */
+export type User$teamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Team
+   */
+  select?: Prisma.TeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Team
+   */
+  omit?: Prisma.TeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamInclude<ExtArgs> | null
+  where?: Prisma.TeamWhereInput
+  orderBy?: Prisma.TeamOrderByWithRelationInput | Prisma.TeamOrderByWithRelationInput[]
+  cursor?: Prisma.TeamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamScalarFieldEnum | Prisma.TeamScalarFieldEnum[]
+}
+
+/**
+ * User.reviews
+ */
+export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Review
+   */
+  select?: Prisma.ReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Review
+   */
+  omit?: Prisma.ReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReviewInclude<ExtArgs> | null
+  where?: Prisma.ReviewWhereInput
+  orderBy?: Prisma.ReviewOrderByWithRelationInput | Prisma.ReviewOrderByWithRelationInput[]
+  cursor?: Prisma.ReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
 }
 
 /**

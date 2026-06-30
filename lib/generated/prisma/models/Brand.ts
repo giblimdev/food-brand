@@ -30,6 +30,8 @@ export type BrandMinAggregateOutputType = {
   description: string | null
   logo: string | null
   createdById: string | null
+  teamId: string | null
+  isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -40,6 +42,8 @@ export type BrandMaxAggregateOutputType = {
   description: string | null
   logo: string | null
   createdById: string | null
+  teamId: string | null
+  isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +54,8 @@ export type BrandCountAggregateOutputType = {
   description: number
   logo: number
   createdById: number
+  teamId: number
+  isActive: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -62,6 +68,8 @@ export type BrandMinAggregateInputType = {
   description?: true
   logo?: true
   createdById?: true
+  teamId?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -72,6 +80,8 @@ export type BrandMaxAggregateInputType = {
   description?: true
   logo?: true
   createdById?: true
+  teamId?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -82,6 +92,8 @@ export type BrandCountAggregateInputType = {
   description?: true
   logo?: true
   createdById?: true
+  teamId?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -165,6 +177,8 @@ export type BrandGroupByOutputType = {
   description: string | null
   logo: string | null
   createdById: string
+  teamId: string | null
+  isActive: boolean
   createdAt: Date
   updatedAt: Date
   _count: BrandCountAggregateOutputType | null
@@ -196,12 +210,21 @@ export type BrandWhereInput = {
   description?: Prisma.StringNullableFilter<"Brand"> | string | null
   logo?: Prisma.StringNullableFilter<"Brand"> | string | null
   createdById?: Prisma.StringFilter<"Brand"> | string
+  teamId?: Prisma.StringNullableFilter<"Brand"> | string | null
+  isActive?: Prisma.BoolFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  team?: Prisma.XOR<Prisma.TeamNullableScalarRelationFilter, Prisma.TeamWhereInput> | null
   owners?: Prisma.BrandOwnerListRelationFilter
   restaurants?: Prisma.RestaurantListRelationFilter
   recipes?: Prisma.RecipeListRelationFilter
+  brandIngredients?: Prisma.BrandIngredientListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
+  carts?: Prisma.CartListRelationFilter
+  dailyStats?: Prisma.DailyStatsListRelationFilter
+  promotions?: Prisma.PromotionListRelationFilter
+  galleries?: Prisma.GalleryListRelationFilter
 }
 
 export type BrandOrderByWithRelationInput = {
@@ -210,12 +233,21 @@ export type BrandOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  teamId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   creator?: Prisma.UserOrderByWithRelationInput
+  team?: Prisma.TeamOrderByWithRelationInput
   owners?: Prisma.BrandOwnerOrderByRelationAggregateInput
   restaurants?: Prisma.RestaurantOrderByRelationAggregateInput
   recipes?: Prisma.RecipeOrderByRelationAggregateInput
+  brandIngredients?: Prisma.BrandIngredientOrderByRelationAggregateInput
+  orders?: Prisma.OrderOrderByRelationAggregateInput
+  carts?: Prisma.CartOrderByRelationAggregateInput
+  dailyStats?: Prisma.DailyStatsOrderByRelationAggregateInput
+  promotions?: Prisma.PromotionOrderByRelationAggregateInput
+  galleries?: Prisma.GalleryOrderByRelationAggregateInput
 }
 
 export type BrandWhereUniqueInput = Prisma.AtLeast<{
@@ -227,12 +259,21 @@ export type BrandWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Brand"> | string | null
   logo?: Prisma.StringNullableFilter<"Brand"> | string | null
   createdById?: Prisma.StringFilter<"Brand"> | string
+  teamId?: Prisma.StringNullableFilter<"Brand"> | string | null
+  isActive?: Prisma.BoolFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  team?: Prisma.XOR<Prisma.TeamNullableScalarRelationFilter, Prisma.TeamWhereInput> | null
   owners?: Prisma.BrandOwnerListRelationFilter
   restaurants?: Prisma.RestaurantListRelationFilter
   recipes?: Prisma.RecipeListRelationFilter
+  brandIngredients?: Prisma.BrandIngredientListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
+  carts?: Prisma.CartListRelationFilter
+  dailyStats?: Prisma.DailyStatsListRelationFilter
+  promotions?: Prisma.PromotionListRelationFilter
+  galleries?: Prisma.GalleryListRelationFilter
 }, "id">
 
 export type BrandOrderByWithAggregationInput = {
@@ -241,6 +282,8 @@ export type BrandOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   logo?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  teamId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BrandCountOrderByAggregateInput
@@ -257,6 +300,8 @@ export type BrandScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
   logo?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
   createdById?: Prisma.StringWithAggregatesFilter<"Brand"> | string
+  teamId?: Prisma.StringNullableWithAggregatesFilter<"Brand"> | string | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Brand"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Brand"> | Date | string
 }
@@ -266,12 +311,20 @@ export type BrandCreateInput = {
   name: string
   description?: string | null
   logo?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
   owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
   restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUncheckedCreateInput = {
@@ -280,11 +333,19 @@ export type BrandUncheckedCreateInput = {
   description?: string | null
   logo?: string | null
   createdById: string
+  teamId?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
   restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUpdateInput = {
@@ -292,12 +353,20 @@ export type BrandUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedBrandsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
   owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
   restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateInput = {
@@ -306,11 +375,19 @@ export type BrandUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
   restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandCreateManyInput = {
@@ -319,6 +396,8 @@ export type BrandCreateManyInput = {
   description?: string | null
   logo?: string | null
   createdById: string
+  teamId?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -328,6 +407,7 @@ export type BrandUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -338,6 +418,8 @@ export type BrandUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -358,6 +440,8 @@ export type BrandCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -368,6 +452,8 @@ export type BrandMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -378,6 +464,8 @@ export type BrandMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -385,6 +473,11 @@ export type BrandMinOrderByAggregateInput = {
 export type BrandScalarRelationFilter = {
   is?: Prisma.BrandWhereInput
   isNot?: Prisma.BrandWhereInput
+}
+
+export type BrandNullableScalarRelationFilter = {
+  is?: Prisma.BrandWhereInput | null
+  isNot?: Prisma.BrandWhereInput | null
 }
 
 export type BrandCreateNestedManyWithoutCreatorInput = {
@@ -426,6 +519,48 @@ export type BrandUncheckedUpdateManyWithoutCreatorNestedInput = {
   connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
   update?: Prisma.BrandUpdateWithWhereUniqueWithoutCreatorInput | Prisma.BrandUpdateWithWhereUniqueWithoutCreatorInput[]
   updateMany?: Prisma.BrandUpdateManyWithWhereWithoutCreatorInput | Prisma.BrandUpdateManyWithWhereWithoutCreatorInput[]
+  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[]
+}
+
+export type BrandCreateNestedManyWithoutTeamInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutTeamInput, Prisma.BrandUncheckedCreateWithoutTeamInput> | Prisma.BrandCreateWithoutTeamInput[] | Prisma.BrandUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutTeamInput | Prisma.BrandCreateOrConnectWithoutTeamInput[]
+  createMany?: Prisma.BrandCreateManyTeamInputEnvelope
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+}
+
+export type BrandUncheckedCreateNestedManyWithoutTeamInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutTeamInput, Prisma.BrandUncheckedCreateWithoutTeamInput> | Prisma.BrandCreateWithoutTeamInput[] | Prisma.BrandUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutTeamInput | Prisma.BrandCreateOrConnectWithoutTeamInput[]
+  createMany?: Prisma.BrandCreateManyTeamInputEnvelope
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+}
+
+export type BrandUpdateManyWithoutTeamNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutTeamInput, Prisma.BrandUncheckedCreateWithoutTeamInput> | Prisma.BrandCreateWithoutTeamInput[] | Prisma.BrandUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutTeamInput | Prisma.BrandCreateOrConnectWithoutTeamInput[]
+  upsert?: Prisma.BrandUpsertWithWhereUniqueWithoutTeamInput | Prisma.BrandUpsertWithWhereUniqueWithoutTeamInput[]
+  createMany?: Prisma.BrandCreateManyTeamInputEnvelope
+  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  update?: Prisma.BrandUpdateWithWhereUniqueWithoutTeamInput | Prisma.BrandUpdateWithWhereUniqueWithoutTeamInput[]
+  updateMany?: Prisma.BrandUpdateManyWithWhereWithoutTeamInput | Prisma.BrandUpdateManyWithWhereWithoutTeamInput[]
+  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[]
+}
+
+export type BrandUncheckedUpdateManyWithoutTeamNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutTeamInput, Prisma.BrandUncheckedCreateWithoutTeamInput> | Prisma.BrandCreateWithoutTeamInput[] | Prisma.BrandUncheckedCreateWithoutTeamInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutTeamInput | Prisma.BrandCreateOrConnectWithoutTeamInput[]
+  upsert?: Prisma.BrandUpsertWithWhereUniqueWithoutTeamInput | Prisma.BrandUpsertWithWhereUniqueWithoutTeamInput[]
+  createMany?: Prisma.BrandCreateManyTeamInputEnvelope
+  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  update?: Prisma.BrandUpdateWithWhereUniqueWithoutTeamInput | Prisma.BrandUpdateWithWhereUniqueWithoutTeamInput[]
+  updateMany?: Prisma.BrandUpdateManyWithWhereWithoutTeamInput | Prisma.BrandUpdateManyWithWhereWithoutTeamInput[]
   deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[]
 }
 
@@ -471,16 +606,134 @@ export type BrandUpdateOneRequiredWithoutRecipesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutRecipesInput, Prisma.BrandUpdateWithoutRecipesInput>, Prisma.BrandUncheckedUpdateWithoutRecipesInput>
 }
 
+export type BrandCreateNestedOneWithoutBrandIngredientsInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutBrandIngredientsInput, Prisma.BrandUncheckedCreateWithoutBrandIngredientsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutBrandIngredientsInput
+  connect?: Prisma.BrandWhereUniqueInput
+}
+
+export type BrandUpdateOneRequiredWithoutBrandIngredientsNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutBrandIngredientsInput, Prisma.BrandUncheckedCreateWithoutBrandIngredientsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutBrandIngredientsInput
+  upsert?: Prisma.BrandUpsertWithoutBrandIngredientsInput
+  connect?: Prisma.BrandWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutBrandIngredientsInput, Prisma.BrandUpdateWithoutBrandIngredientsInput>, Prisma.BrandUncheckedUpdateWithoutBrandIngredientsInput>
+}
+
+export type BrandCreateNestedOneWithoutCartsInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutCartsInput, Prisma.BrandUncheckedCreateWithoutCartsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutCartsInput
+  connect?: Prisma.BrandWhereUniqueInput
+}
+
+export type BrandUpdateOneRequiredWithoutCartsNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutCartsInput, Prisma.BrandUncheckedCreateWithoutCartsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutCartsInput
+  upsert?: Prisma.BrandUpsertWithoutCartsInput
+  connect?: Prisma.BrandWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutCartsInput, Prisma.BrandUpdateWithoutCartsInput>, Prisma.BrandUncheckedUpdateWithoutCartsInput>
+}
+
+export type BrandCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutOrdersInput, Prisma.BrandUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.BrandWhereUniqueInput
+}
+
+export type BrandUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutOrdersInput, Prisma.BrandUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.BrandUpsertWithoutOrdersInput
+  connect?: Prisma.BrandWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutOrdersInput, Prisma.BrandUpdateWithoutOrdersInput>, Prisma.BrandUncheckedUpdateWithoutOrdersInput>
+}
+
+export type BrandCreateNestedOneWithoutDailyStatsInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutDailyStatsInput, Prisma.BrandUncheckedCreateWithoutDailyStatsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutDailyStatsInput
+  connect?: Prisma.BrandWhereUniqueInput
+}
+
+export type BrandUpdateOneRequiredWithoutDailyStatsNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutDailyStatsInput, Prisma.BrandUncheckedCreateWithoutDailyStatsInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutDailyStatsInput
+  upsert?: Prisma.BrandUpsertWithoutDailyStatsInput
+  connect?: Prisma.BrandWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutDailyStatsInput, Prisma.BrandUpdateWithoutDailyStatsInput>, Prisma.BrandUncheckedUpdateWithoutDailyStatsInput>
+}
+
+export type BrandCreateNestedManyWithoutPromotionsInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutPromotionsInput, Prisma.BrandUncheckedCreateWithoutPromotionsInput> | Prisma.BrandCreateWithoutPromotionsInput[] | Prisma.BrandUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutPromotionsInput | Prisma.BrandCreateOrConnectWithoutPromotionsInput[]
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+}
+
+export type BrandUncheckedCreateNestedManyWithoutPromotionsInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutPromotionsInput, Prisma.BrandUncheckedCreateWithoutPromotionsInput> | Prisma.BrandCreateWithoutPromotionsInput[] | Prisma.BrandUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutPromotionsInput | Prisma.BrandCreateOrConnectWithoutPromotionsInput[]
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+}
+
+export type BrandUpdateManyWithoutPromotionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutPromotionsInput, Prisma.BrandUncheckedCreateWithoutPromotionsInput> | Prisma.BrandCreateWithoutPromotionsInput[] | Prisma.BrandUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutPromotionsInput | Prisma.BrandCreateOrConnectWithoutPromotionsInput[]
+  upsert?: Prisma.BrandUpsertWithWhereUniqueWithoutPromotionsInput | Prisma.BrandUpsertWithWhereUniqueWithoutPromotionsInput[]
+  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  update?: Prisma.BrandUpdateWithWhereUniqueWithoutPromotionsInput | Prisma.BrandUpdateWithWhereUniqueWithoutPromotionsInput[]
+  updateMany?: Prisma.BrandUpdateManyWithWhereWithoutPromotionsInput | Prisma.BrandUpdateManyWithWhereWithoutPromotionsInput[]
+  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[]
+}
+
+export type BrandUncheckedUpdateManyWithoutPromotionsNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutPromotionsInput, Prisma.BrandUncheckedCreateWithoutPromotionsInput> | Prisma.BrandCreateWithoutPromotionsInput[] | Prisma.BrandUncheckedCreateWithoutPromotionsInput[]
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutPromotionsInput | Prisma.BrandCreateOrConnectWithoutPromotionsInput[]
+  upsert?: Prisma.BrandUpsertWithWhereUniqueWithoutPromotionsInput | Prisma.BrandUpsertWithWhereUniqueWithoutPromotionsInput[]
+  set?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  disconnect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  delete?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  connect?: Prisma.BrandWhereUniqueInput | Prisma.BrandWhereUniqueInput[]
+  update?: Prisma.BrandUpdateWithWhereUniqueWithoutPromotionsInput | Prisma.BrandUpdateWithWhereUniqueWithoutPromotionsInput[]
+  updateMany?: Prisma.BrandUpdateManyWithWhereWithoutPromotionsInput | Prisma.BrandUpdateManyWithWhereWithoutPromotionsInput[]
+  deleteMany?: Prisma.BrandScalarWhereInput | Prisma.BrandScalarWhereInput[]
+}
+
+export type BrandCreateNestedOneWithoutGalleriesInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutGalleriesInput, Prisma.BrandUncheckedCreateWithoutGalleriesInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutGalleriesInput
+  connect?: Prisma.BrandWhereUniqueInput
+}
+
+export type BrandUpdateOneWithoutGalleriesNestedInput = {
+  create?: Prisma.XOR<Prisma.BrandCreateWithoutGalleriesInput, Prisma.BrandUncheckedCreateWithoutGalleriesInput>
+  connectOrCreate?: Prisma.BrandCreateOrConnectWithoutGalleriesInput
+  upsert?: Prisma.BrandUpsertWithoutGalleriesInput
+  disconnect?: Prisma.BrandWhereInput | boolean
+  delete?: Prisma.BrandWhereInput | boolean
+  connect?: Prisma.BrandWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BrandUpdateToOneWithWhereWithoutGalleriesInput, Prisma.BrandUpdateWithoutGalleriesInput>, Prisma.BrandUncheckedUpdateWithoutGalleriesInput>
+}
+
 export type BrandCreateWithoutCreatorInput = {
   id?: string
   name: string
   description?: string | null
   logo?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
   owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
   restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUncheckedCreateWithoutCreatorInput = {
@@ -488,11 +741,19 @@ export type BrandUncheckedCreateWithoutCreatorInput = {
   name: string
   description?: string | null
   logo?: string | null
+  teamId?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
   restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandCreateOrConnectWithoutCreatorInput = {
@@ -530,8 +791,76 @@ export type BrandScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Brand"> | string | null
   logo?: Prisma.StringNullableFilter<"Brand"> | string | null
   createdById?: Prisma.StringFilter<"Brand"> | string
+  teamId?: Prisma.StringNullableFilter<"Brand"> | string | null
+  isActive?: Prisma.BoolFilter<"Brand"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Brand"> | Date | string
+}
+
+export type BrandCreateWithoutTeamInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutTeamInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutTeamInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutTeamInput, Prisma.BrandUncheckedCreateWithoutTeamInput>
+}
+
+export type BrandCreateManyTeamInputEnvelope = {
+  data: Prisma.BrandCreateManyTeamInput | Prisma.BrandCreateManyTeamInput[]
+  skipDuplicates?: boolean
+}
+
+export type BrandUpsertWithWhereUniqueWithoutTeamInput = {
+  where: Prisma.BrandWhereUniqueInput
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutTeamInput, Prisma.BrandUncheckedUpdateWithoutTeamInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutTeamInput, Prisma.BrandUncheckedCreateWithoutTeamInput>
+}
+
+export type BrandUpdateWithWhereUniqueWithoutTeamInput = {
+  where: Prisma.BrandWhereUniqueInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutTeamInput, Prisma.BrandUncheckedUpdateWithoutTeamInput>
+}
+
+export type BrandUpdateManyWithWhereWithoutTeamInput = {
+  where: Prisma.BrandScalarWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateManyMutationInput, Prisma.BrandUncheckedUpdateManyWithoutTeamInput>
 }
 
 export type BrandCreateWithoutOwnersInput = {
@@ -539,11 +868,19 @@ export type BrandCreateWithoutOwnersInput = {
   name: string
   description?: string | null
   logo?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
   restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUncheckedCreateWithoutOwnersInput = {
@@ -552,10 +889,18 @@ export type BrandUncheckedCreateWithoutOwnersInput = {
   description?: string | null
   logo?: string | null
   createdById: string
+  teamId?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandCreateOrConnectWithoutOwnersInput = {
@@ -579,11 +924,19 @@ export type BrandUpdateWithoutOwnersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedBrandsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
   restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateWithoutOwnersInput = {
@@ -592,10 +945,18 @@ export type BrandUncheckedUpdateWithoutOwnersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandCreateWithoutRestaurantsInput = {
@@ -603,11 +964,19 @@ export type BrandCreateWithoutRestaurantsInput = {
   name: string
   description?: string | null
   logo?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
   owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUncheckedCreateWithoutRestaurantsInput = {
@@ -616,10 +985,18 @@ export type BrandUncheckedCreateWithoutRestaurantsInput = {
   description?: string | null
   logo?: string | null
   createdById: string
+  teamId?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
   recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandCreateOrConnectWithoutRestaurantsInput = {
@@ -643,11 +1020,19 @@ export type BrandUpdateWithoutRestaurantsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedBrandsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
   owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateWithoutRestaurantsInput = {
@@ -656,10 +1041,18 @@ export type BrandUncheckedUpdateWithoutRestaurantsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandCreateWithoutRecipesInput = {
@@ -667,11 +1060,19 @@ export type BrandCreateWithoutRecipesInput = {
   name: string
   description?: string | null
   logo?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  creator: Prisma.UserCreateNestedOneWithoutCreatedBrandsInput
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
   owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
   restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
 }
 
 export type BrandUncheckedCreateWithoutRecipesInput = {
@@ -680,10 +1081,18 @@ export type BrandUncheckedCreateWithoutRecipesInput = {
   description?: string | null
   logo?: string | null
   createdById: string
+  teamId?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
   restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
 }
 
 export type BrandCreateOrConnectWithoutRecipesInput = {
@@ -707,11 +1116,19 @@ export type BrandUpdateWithoutRecipesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.UserUpdateOneRequiredWithoutCreatedBrandsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
   owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
   restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateWithoutRecipesInput = {
@@ -720,10 +1137,559 @@ export type BrandUncheckedUpdateWithoutRecipesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
   restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandCreateWithoutBrandIngredientsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
+  owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutBrandIngredientsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  teamId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutBrandIngredientsInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutBrandIngredientsInput, Prisma.BrandUncheckedCreateWithoutBrandIngredientsInput>
+}
+
+export type BrandUpsertWithoutBrandIngredientsInput = {
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutBrandIngredientsInput, Prisma.BrandUncheckedUpdateWithoutBrandIngredientsInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutBrandIngredientsInput, Prisma.BrandUncheckedCreateWithoutBrandIngredientsInput>
+  where?: Prisma.BrandWhereInput
+}
+
+export type BrandUpdateToOneWithWhereWithoutBrandIngredientsInput = {
+  where?: Prisma.BrandWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutBrandIngredientsInput, Prisma.BrandUncheckedUpdateWithoutBrandIngredientsInput>
+}
+
+export type BrandUpdateWithoutBrandIngredientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
+  owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutBrandIngredientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandCreateWithoutCartsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
+  owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutCartsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  teamId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutCartsInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutCartsInput, Prisma.BrandUncheckedCreateWithoutCartsInput>
+}
+
+export type BrandUpsertWithoutCartsInput = {
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutCartsInput, Prisma.BrandUncheckedUpdateWithoutCartsInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutCartsInput, Prisma.BrandUncheckedCreateWithoutCartsInput>
+  where?: Prisma.BrandWhereInput
+}
+
+export type BrandUpdateToOneWithWhereWithoutCartsInput = {
+  where?: Prisma.BrandWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutCartsInput, Prisma.BrandUncheckedUpdateWithoutCartsInput>
+}
+
+export type BrandUpdateWithoutCartsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
+  owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutCartsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
+  owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  teamId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutOrdersInput, Prisma.BrandUncheckedCreateWithoutOrdersInput>
+}
+
+export type BrandUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutOrdersInput, Prisma.BrandUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutOrdersInput, Prisma.BrandUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.BrandWhereInput
+}
+
+export type BrandUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.BrandWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutOrdersInput, Prisma.BrandUncheckedUpdateWithoutOrdersInput>
+}
+
+export type BrandUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
+  owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandCreateWithoutDailyStatsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
+  owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutDailyStatsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  teamId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutDailyStatsInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutDailyStatsInput, Prisma.BrandUncheckedCreateWithoutDailyStatsInput>
+}
+
+export type BrandUpsertWithoutDailyStatsInput = {
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutDailyStatsInput, Prisma.BrandUncheckedUpdateWithoutDailyStatsInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutDailyStatsInput, Prisma.BrandUncheckedCreateWithoutDailyStatsInput>
+  where?: Prisma.BrandWhereInput
+}
+
+export type BrandUpdateToOneWithWhereWithoutDailyStatsInput = {
+  where?: Prisma.BrandWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutDailyStatsInput, Prisma.BrandUncheckedUpdateWithoutDailyStatsInput>
+}
+
+export type BrandUpdateWithoutDailyStatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
+  owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutDailyStatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandCreateWithoutPromotionsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
+  owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  galleries?: Prisma.GalleryCreateNestedManyWithoutBrandInput
+}
+
+export type BrandUncheckedCreateWithoutPromotionsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  teamId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  galleries?: Prisma.GalleryUncheckedCreateNestedManyWithoutBrandInput
+}
+
+export type BrandCreateOrConnectWithoutPromotionsInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutPromotionsInput, Prisma.BrandUncheckedCreateWithoutPromotionsInput>
+}
+
+export type BrandUpsertWithWhereUniqueWithoutPromotionsInput = {
+  where: Prisma.BrandWhereUniqueInput
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutPromotionsInput, Prisma.BrandUncheckedUpdateWithoutPromotionsInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutPromotionsInput, Prisma.BrandUncheckedCreateWithoutPromotionsInput>
+}
+
+export type BrandUpdateWithWhereUniqueWithoutPromotionsInput = {
+  where: Prisma.BrandWhereUniqueInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutPromotionsInput, Prisma.BrandUncheckedUpdateWithoutPromotionsInput>
+}
+
+export type BrandUpdateManyWithWhereWithoutPromotionsInput = {
+  where: Prisma.BrandScalarWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateManyMutationInput, Prisma.BrandUncheckedUpdateManyWithoutPromotionsInput>
+}
+
+export type BrandCreateWithoutGalleriesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutBrandsInput
+  team?: Prisma.TeamCreateNestedOneWithoutBrandsInput
+  owners?: Prisma.BrandOwnerCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionCreateNestedManyWithoutBrandsInput
+}
+
+export type BrandUncheckedCreateWithoutGalleriesInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  teamId?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owners?: Prisma.BrandOwnerUncheckedCreateNestedManyWithoutBrandInput
+  restaurants?: Prisma.RestaurantUncheckedCreateNestedManyWithoutBrandInput
+  recipes?: Prisma.RecipeUncheckedCreateNestedManyWithoutBrandInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedCreateNestedManyWithoutBrandInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutBrandInput
+  carts?: Prisma.CartUncheckedCreateNestedManyWithoutBrandInput
+  dailyStats?: Prisma.DailyStatsUncheckedCreateNestedManyWithoutBrandInput
+  promotions?: Prisma.PromotionUncheckedCreateNestedManyWithoutBrandsInput
+}
+
+export type BrandCreateOrConnectWithoutGalleriesInput = {
+  where: Prisma.BrandWhereUniqueInput
+  create: Prisma.XOR<Prisma.BrandCreateWithoutGalleriesInput, Prisma.BrandUncheckedCreateWithoutGalleriesInput>
+}
+
+export type BrandUpsertWithoutGalleriesInput = {
+  update: Prisma.XOR<Prisma.BrandUpdateWithoutGalleriesInput, Prisma.BrandUncheckedUpdateWithoutGalleriesInput>
+  create: Prisma.XOR<Prisma.BrandCreateWithoutGalleriesInput, Prisma.BrandUncheckedCreateWithoutGalleriesInput>
+  where?: Prisma.BrandWhereInput
+}
+
+export type BrandUpdateToOneWithWhereWithoutGalleriesInput = {
+  where?: Prisma.BrandWhereInput
+  data: Prisma.XOR<Prisma.BrandUpdateWithoutGalleriesInput, Prisma.BrandUncheckedUpdateWithoutGalleriesInput>
+}
+
+export type BrandUpdateWithoutGalleriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
+  owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutGalleriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
 }
 
 export type BrandCreateManyCreatorInput = {
@@ -731,6 +1697,8 @@ export type BrandCreateManyCreatorInput = {
   name: string
   description?: string | null
   logo?: string | null
+  teamId?: string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -740,11 +1708,19 @@ export type BrandUpdateWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
   owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
   restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateWithoutCreatorInput = {
@@ -752,11 +1728,19 @@ export type BrandUncheckedUpdateWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
   restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
   recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
 }
 
 export type BrandUncheckedUpdateManyWithoutCreatorInput = {
@@ -764,6 +1748,122 @@ export type BrandUncheckedUpdateManyWithoutCreatorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BrandCreateManyTeamInput = {
+  id?: string
+  name: string
+  description?: string | null
+  logo?: string | null
+  createdById: string
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BrandUpdateWithoutTeamInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutTeamInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  promotions?: Prisma.PromotionUncheckedUpdateManyWithoutBrandsNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateManyWithoutTeamInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BrandUpdateWithoutPromotionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBrandsNestedInput
+  team?: Prisma.TeamUpdateOneWithoutBrandsNestedInput
+  owners?: Prisma.BrandOwnerUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUpdateManyWithoutBrandNestedInput
+  galleries?: Prisma.GalleryUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateWithoutPromotionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owners?: Prisma.BrandOwnerUncheckedUpdateManyWithoutBrandNestedInput
+  restaurants?: Prisma.RestaurantUncheckedUpdateManyWithoutBrandNestedInput
+  recipes?: Prisma.RecipeUncheckedUpdateManyWithoutBrandNestedInput
+  brandIngredients?: Prisma.BrandIngredientUncheckedUpdateManyWithoutBrandNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutBrandNestedInput
+  carts?: Prisma.CartUncheckedUpdateManyWithoutBrandNestedInput
+  dailyStats?: Prisma.DailyStatsUncheckedUpdateManyWithoutBrandNestedInput
+  galleries?: Prisma.GalleryUncheckedUpdateManyWithoutBrandNestedInput
+}
+
+export type BrandUncheckedUpdateManyWithoutPromotionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  teamId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -777,12 +1877,24 @@ export type BrandCountOutputType = {
   owners: number
   restaurants: number
   recipes: number
+  brandIngredients: number
+  orders: number
+  carts: number
+  dailyStats: number
+  promotions: number
+  galleries: number
 }
 
 export type BrandCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owners?: boolean | BrandCountOutputTypeCountOwnersArgs
   restaurants?: boolean | BrandCountOutputTypeCountRestaurantsArgs
   recipes?: boolean | BrandCountOutputTypeCountRecipesArgs
+  brandIngredients?: boolean | BrandCountOutputTypeCountBrandIngredientsArgs
+  orders?: boolean | BrandCountOutputTypeCountOrdersArgs
+  carts?: boolean | BrandCountOutputTypeCountCartsArgs
+  dailyStats?: boolean | BrandCountOutputTypeCountDailyStatsArgs
+  promotions?: boolean | BrandCountOutputTypeCountPromotionsArgs
+  galleries?: boolean | BrandCountOutputTypeCountGalleriesArgs
 }
 
 /**
@@ -816,6 +1928,48 @@ export type BrandCountOutputTypeCountRecipesArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.RecipeWhereInput
 }
 
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountBrandIngredientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BrandIngredientWhereInput
+}
+
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderWhereInput
+}
+
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountCartsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CartWhereInput
+}
+
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountDailyStatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DailyStatsWhereInput
+}
+
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountPromotionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PromotionWhereInput
+}
+
+/**
+ * BrandCountOutputType without action
+ */
+export type BrandCountOutputTypeCountGalleriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GalleryWhereInput
+}
+
 
 export type BrandSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -823,12 +1977,21 @@ export type BrandSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   description?: boolean
   logo?: boolean
   createdById?: boolean
+  teamId?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.Brand$teamArgs<ExtArgs>
   owners?: boolean | Prisma.Brand$ownersArgs<ExtArgs>
   restaurants?: boolean | Prisma.Brand$restaurantsArgs<ExtArgs>
   recipes?: boolean | Prisma.Brand$recipesArgs<ExtArgs>
+  brandIngredients?: boolean | Prisma.Brand$brandIngredientsArgs<ExtArgs>
+  orders?: boolean | Prisma.Brand$ordersArgs<ExtArgs>
+  carts?: boolean | Prisma.Brand$cartsArgs<ExtArgs>
+  dailyStats?: boolean | Prisma.Brand$dailyStatsArgs<ExtArgs>
+  promotions?: boolean | Prisma.Brand$promotionsArgs<ExtArgs>
+  galleries?: boolean | Prisma.Brand$galleriesArgs<ExtArgs>
   _count?: boolean | Prisma.BrandCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["brand"]>
 
@@ -838,9 +2001,12 @@ export type BrandSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   description?: boolean
   logo?: boolean
   createdById?: boolean
+  teamId?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.Brand$teamArgs<ExtArgs>
 }, ExtArgs["result"]["brand"]>
 
 export type BrandSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -849,9 +2015,12 @@ export type BrandSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   description?: boolean
   logo?: boolean
   createdById?: boolean
+  teamId?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.Brand$teamArgs<ExtArgs>
 }, ExtArgs["result"]["brand"]>
 
 export type BrandSelectScalar = {
@@ -860,32 +2029,50 @@ export type BrandSelectScalar = {
   description?: boolean
   logo?: boolean
   createdById?: boolean
+  teamId?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BrandOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "logo" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
+export type BrandOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "logo" | "createdById" | "teamId" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
 export type BrandInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.Brand$teamArgs<ExtArgs>
   owners?: boolean | Prisma.Brand$ownersArgs<ExtArgs>
   restaurants?: boolean | Prisma.Brand$restaurantsArgs<ExtArgs>
   recipes?: boolean | Prisma.Brand$recipesArgs<ExtArgs>
+  brandIngredients?: boolean | Prisma.Brand$brandIngredientsArgs<ExtArgs>
+  orders?: boolean | Prisma.Brand$ordersArgs<ExtArgs>
+  carts?: boolean | Prisma.Brand$cartsArgs<ExtArgs>
+  dailyStats?: boolean | Prisma.Brand$dailyStatsArgs<ExtArgs>
+  promotions?: boolean | Prisma.Brand$promotionsArgs<ExtArgs>
+  galleries?: boolean | Prisma.Brand$galleriesArgs<ExtArgs>
   _count?: boolean | Prisma.BrandCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BrandIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.Brand$teamArgs<ExtArgs>
 }
 export type BrandIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  team?: boolean | Prisma.Brand$teamArgs<ExtArgs>
 }
 
 export type $BrandPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Brand"
   objects: {
     creator: Prisma.$UserPayload<ExtArgs>
+    team: Prisma.$TeamPayload<ExtArgs> | null
     owners: Prisma.$BrandOwnerPayload<ExtArgs>[]
     restaurants: Prisma.$RestaurantPayload<ExtArgs>[]
     recipes: Prisma.$RecipePayload<ExtArgs>[]
+    brandIngredients: Prisma.$BrandIngredientPayload<ExtArgs>[]
+    orders: Prisma.$OrderPayload<ExtArgs>[]
+    carts: Prisma.$CartPayload<ExtArgs>[]
+    dailyStats: Prisma.$DailyStatsPayload<ExtArgs>[]
+    promotions: Prisma.$PromotionPayload<ExtArgs>[]
+    galleries: Prisma.$GalleryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -893,6 +2080,8 @@ export type $BrandPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     description: string | null
     logo: string | null
     createdById: string
+    teamId: string | null
+    isActive: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["brand"]>
@@ -1290,9 +2479,16 @@ readonly fields: BrandFieldRefs;
 export interface Prisma__BrandClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   creator<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  team<T extends Prisma.Brand$teamArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$teamArgs<ExtArgs>>): Prisma.Prisma__TeamClient<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   owners<T extends Prisma.Brand$ownersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$ownersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandOwnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   restaurants<T extends Prisma.Brand$restaurantsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$restaurantsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   recipes<T extends Prisma.Brand$recipesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$recipesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  brandIngredients<T extends Prisma.Brand$brandIngredientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$brandIngredientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandIngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orders<T extends Prisma.Brand$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  carts<T extends Prisma.Brand$cartsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$cartsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dailyStats<T extends Prisma.Brand$dailyStatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$dailyStatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DailyStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  promotions<T extends Prisma.Brand$promotionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$promotionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PromotionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  galleries<T extends Prisma.Brand$galleriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Brand$galleriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1327,6 +2523,8 @@ export interface BrandFieldRefs {
   readonly description: Prisma.FieldRef<"Brand", 'String'>
   readonly logo: Prisma.FieldRef<"Brand", 'String'>
   readonly createdById: Prisma.FieldRef<"Brand", 'String'>
+  readonly teamId: Prisma.FieldRef<"Brand", 'String'>
+  readonly isActive: Prisma.FieldRef<"Brand", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Brand", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Brand", 'DateTime'>
 }
@@ -1730,6 +2928,25 @@ export type BrandDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Brand.team
+ */
+export type Brand$teamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Team
+   */
+  select?: Prisma.TeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Team
+   */
+  omit?: Prisma.TeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamInclude<ExtArgs> | null
+  where?: Prisma.TeamWhereInput
+}
+
+/**
  * Brand.owners
  */
 export type Brand$ownersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1799,6 +3016,150 @@ export type Brand$recipesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.RecipeScalarFieldEnum | Prisma.RecipeScalarFieldEnum[]
+}
+
+/**
+ * Brand.brandIngredients
+ */
+export type Brand$brandIngredientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BrandIngredient
+   */
+  select?: Prisma.BrandIngredientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BrandIngredient
+   */
+  omit?: Prisma.BrandIngredientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandIngredientInclude<ExtArgs> | null
+  where?: Prisma.BrandIngredientWhereInput
+  orderBy?: Prisma.BrandIngredientOrderByWithRelationInput | Prisma.BrandIngredientOrderByWithRelationInput[]
+  cursor?: Prisma.BrandIngredientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BrandIngredientScalarFieldEnum | Prisma.BrandIngredientScalarFieldEnum[]
+}
+
+/**
+ * Brand.orders
+ */
+export type Brand$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null
+  where?: Prisma.OrderWhereInput
+  orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[]
+  cursor?: Prisma.OrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * Brand.carts
+ */
+export type Brand$cartsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cart
+   */
+  select?: Prisma.CartSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cart
+   */
+  omit?: Prisma.CartOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CartInclude<ExtArgs> | null
+  where?: Prisma.CartWhereInput
+  orderBy?: Prisma.CartOrderByWithRelationInput | Prisma.CartOrderByWithRelationInput[]
+  cursor?: Prisma.CartWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CartScalarFieldEnum | Prisma.CartScalarFieldEnum[]
+}
+
+/**
+ * Brand.dailyStats
+ */
+export type Brand$dailyStatsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DailyStats
+   */
+  select?: Prisma.DailyStatsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DailyStats
+   */
+  omit?: Prisma.DailyStatsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DailyStatsInclude<ExtArgs> | null
+  where?: Prisma.DailyStatsWhereInput
+  orderBy?: Prisma.DailyStatsOrderByWithRelationInput | Prisma.DailyStatsOrderByWithRelationInput[]
+  cursor?: Prisma.DailyStatsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DailyStatsScalarFieldEnum | Prisma.DailyStatsScalarFieldEnum[]
+}
+
+/**
+ * Brand.promotions
+ */
+export type Brand$promotionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Promotion
+   */
+  select?: Prisma.PromotionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Promotion
+   */
+  omit?: Prisma.PromotionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PromotionInclude<ExtArgs> | null
+  where?: Prisma.PromotionWhereInput
+  orderBy?: Prisma.PromotionOrderByWithRelationInput | Prisma.PromotionOrderByWithRelationInput[]
+  cursor?: Prisma.PromotionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PromotionScalarFieldEnum | Prisma.PromotionScalarFieldEnum[]
+}
+
+/**
+ * Brand.galleries
+ */
+export type Brand$galleriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Gallery
+   */
+  select?: Prisma.GallerySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Gallery
+   */
+  omit?: Prisma.GalleryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GalleryInclude<ExtArgs> | null
+  where?: Prisma.GalleryWhereInput
+  orderBy?: Prisma.GalleryOrderByWithRelationInput | Prisma.GalleryOrderByWithRelationInput[]
+  cursor?: Prisma.GalleryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GalleryScalarFieldEnum | Prisma.GalleryScalarFieldEnum[]
 }
 
 /**

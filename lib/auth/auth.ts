@@ -1,39 +1,61 @@
-// @/lib/auth.ts
+// lib/auth.ts
+
+
+
+///type : page
+/*role :  */              
+/*fonctionnement : */ 
+//imports [] 
+//exports [] 
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent. 
+
+
+
 import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
+import { prismaAdapter } from "@better-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 
 export const auth = betterAuth({
-  // Adaptateur Prisma 7 (connecté à ta base via PrismaPg)
   database: prismaAdapter(prisma, { provider: "postgresql" }),
 
-  // Configuration des utilisateurs avec champs additionnels
+  // Générateur d’ID – vous pouvez le garder ou l’enlever
+  // Si vous le gardez, il doit produire un format compatible avec votre @default()
+  generateId: () => crypto.randomUUID(),
+
   user: {
+    modelName: "User",
     additionalFields: {
-      roles: {
-        type: "string[]",
-        defaultValue: ["USER"],
+      role: {
+        type: "string",
+        defaultValue: "CLIENT",
         required: true,
-        input: false, // Ne pas permettre la modification directe à la création
+        input: false,
       },
     },
   },
 
-  // Active la stratégie credentials (email + password)
+  account: {
+    modelName: "Account",
+  },
+
+  verificationToken: {
+    modelName: "Verification",
+  },
+
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,
     requireEmailVerification: false,
+    autoSignIn: true,
   },
 
-  // Configuration de sécurité
   secret: process.env.BETTER_AUTH_SECRET!,
   baseURL: process.env.BETTER_AUTH_URL!,
 
-  // Configuration des cookies/session
   session: {
-    expiresIn: 60 * 60 * 24 * 7, // 7 jours
-    updateAge: 60 * 60 * 24, // Mise à jour toutes les 24h
+    expiresIn: 60 * 60 * 24 * 7,
+    updateAge: 60 * 60 * 24,
   },
 
   cookies: {
@@ -41,11 +63,9 @@ export const auth = betterAuth({
     sameSite: "lax",
   },
 
-  // Logging
   logger: {
     level: process.env.NODE_ENV === "production" ? "error" : "info",
   },
 });
 
-// Export du type pour TypeScript
 export type Session = typeof auth.$Infer.Session;

@@ -10,12 +10,165 @@
 */
 
 export const Role = {
+  GUEST: 'GUEST',
   CLIENT: 'CLIENT',
   BUSINESS: 'BUSINESS',
-  COLLABORATOR: 'COLLABORATOR'
+  COLLABORATOR: 'COLLABORATOR',
+  LIVREUR: 'LIVREUR',
+  ADMIN: 'ADMIN'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER',
+  PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const Persona = {
+  CLIENT: 'CLIENT',
+  PRO: 'PRO',
+  ADMIN: 'ADMIN',
+  DEVELOPER: 'DEVELOPER',
+  VISITEUR: 'VISITEUR',
+  LIVREUR: 'LIVREUR'
+} as const
+
+export type Persona = (typeof Persona)[keyof typeof Persona]
+
+
+export const Status = {
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  DONE: 'DONE',
+  BLOCKED: 'BLOCKED',
+  REVIEW: 'REVIEW',
+  TESTING: 'TESTING',
+  DEPLOYED: 'DEPLOYED'
+} as const
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+
+export const Priority = {
+  CRITICAL: 'CRITICAL',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW',
+  TRIVIAL: 'TRIVIAL'
+} as const
+
+export type Priority = (typeof Priority)[keyof typeof Priority]
+
+
+export const SchemaStatus = {
+  PENDING: 'PENDING',
+  VALIDATING: 'VALIDATING',
+  VALID: 'VALID',
+  INVALID: 'INVALID',
+  ERROR: 'ERROR',
+  OUTDATED: 'OUTDATED'
+} as const
+
+export type SchemaStatus = (typeof SchemaStatus)[keyof typeof SchemaStatus]
+
+
+export const FileType = {
+  LAYOUT: 'LAYOUT',
+  PAGE: 'PAGE',
+  COMPOSANT: 'COMPOSANT',
+  LIB: 'LIB',
+  UTILS: 'UTILS',
+  NEXT: 'NEXT',
+  STORE: 'STORE',
+  API: 'API',
+  CONFIG: 'CONFIG',
+  MIDDLEWARE: 'MIDDLEWARE',
+  SCHEMA: 'SCHEMA',
+  ACTION: 'ACTION',
+  HOOK: 'HOOK',
+  STYLE: 'STYLE',
+  TEST: 'TEST',
+  DOCUMENTATION: 'DOCUMENTATION',
+  SCRIPT: 'SCRIPT',
+  OTHER: 'OTHER'
+} as const
+
+export type FileType = (typeof FileType)[keyof typeof FileType]
+
+
+export const SyncStatus = {
+  SYNCED: 'SYNCED',
+  LOCAL_NEWER: 'LOCAL_NEWER',
+  DB_NEWER: 'DB_NEWER',
+  CONFLICT: 'CONFLICT',
+  MISSING_LOCAL: 'MISSING_LOCAL',
+  MISSING_DB: 'MISSING_DB'
+} as const
+
+export type SyncStatus = (typeof SyncStatus)[keyof typeof SyncStatus]
+
+
+export const LogAction = {
+  SCAN: 'SCAN',
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
+  SYNC: 'SYNC',
+  VALIDATE: 'VALIDATE',
+  DEPLOY: 'DEPLOY',
+  ROLLBACK: 'ROLLBACK',
+  IMPORT: 'IMPORT',
+  EXPORT: 'EXPORT',
+  GENERATE: 'GENERATE',
+  OTHER: 'OTHER'
+} as const
+
+export type LogAction = (typeof LogAction)[keyof typeof LogAction]
+
+
+export const LogCategory = {
+  SYSTEM: 'SYSTEM',
+  DATABASE: 'DATABASE',
+  FILESYSTEM: 'FILESYSTEM',
+  API: 'API',
+  SECURITY: 'SECURITY',
+  USER: 'USER',
+  FEATURE: 'FEATURE',
+  SCHEMA: 'SCHEMA',
+  DEPLOYMENT: 'DEPLOYMENT'
+} as const
+
+export type LogCategory = (typeof LogCategory)[keyof typeof LogCategory]
+
+
+export const LogStatus = {
+  SUCCESS: 'SUCCESS',
+  WARNING: 'WARNING',
+  ERROR: 'ERROR',
+  INFO: 'INFO',
+  PENDING: 'PENDING',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type LogStatus = (typeof LogStatus)[keyof typeof LogStatus]
+
+
+export const TeamRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MANAGER: 'MANAGER',
+  MEMBER: 'MEMBER',
+  VIEWER: 'VIEWER'
+} as const
+
+export type TeamRole = (typeof TeamRole)[keyof typeof TeamRole]
 
 
 export const OwnerRole = {
@@ -25,3 +178,188 @@ export const OwnerRole = {
 } as const
 
 export type OwnerRole = (typeof OwnerRole)[keyof typeof OwnerRole]
+
+
+export const MenuCategory = {
+  APPETIZER: 'APPETIZER',
+  MAIN_COURSE: 'MAIN_COURSE',
+  DESSERT: 'DESSERT',
+  BEVERAGE: 'BEVERAGE',
+  SNACK: 'SNACK'
+} as const
+
+export type MenuCategory = (typeof MenuCategory)[keyof typeof MenuCategory]
+
+
+export const Allergen = {
+  GLUTEN: 'GLUTEN',
+  CRUSTACEANS: 'CRUSTACEANS',
+  EGGS: 'EGGS',
+  FISH: 'FISH',
+  PEANUTS: 'PEANUTS',
+  SOYBEANS: 'SOYBEANS',
+  MILK: 'MILK',
+  NUTS: 'NUTS',
+  CELERY: 'CELERY',
+  MUSTARD: 'MUSTARD',
+  SESAME_SEEDS: 'SESAME_SEEDS',
+  SULPHUR_DIOXIDE: 'SULPHUR_DIOXIDE',
+  LUPIN: 'LUPIN',
+  MOLLUSCS: 'MOLLUSCS'
+} as const
+
+export type Allergen = (typeof Allergen)[keyof typeof Allergen]
+
+
+export const Unit = {
+  GRAM: 'GRAM',
+  KILOGRAM: 'KILOGRAM',
+  LITER: 'LITER',
+  MILLILITER: 'MILLILITER',
+  UNIT: 'UNIT',
+  TABLESPOON: 'TABLESPOON',
+  TEASPOON: 'TEASPOON',
+  CUP: 'CUP'
+} as const
+
+export type Unit = (typeof Unit)[keyof typeof Unit]
+
+
+export const IngredientCategory = {
+  MEAT: 'MEAT',
+  FISH: 'FISH',
+  VEGETABLE: 'VEGETABLE',
+  FRUIT: 'FRUIT',
+  DAIRY: 'DAIRY',
+  GRAIN: 'GRAIN',
+  SPICE: 'SPICE',
+  OIL: 'OIL',
+  SAUCE: 'SAUCE',
+  BEVERAGE: 'BEVERAGE',
+  OTHER: 'OTHER'
+} as const
+
+export type IngredientCategory = (typeof IngredientCategory)[keyof typeof IngredientCategory]
+
+
+export const StockMovementType = {
+  PURCHASE: 'PURCHASE',
+  SALE: 'SALE',
+  WASTE: 'WASTE',
+  RETURN: 'RETURN',
+  ADJUSTMENT: 'ADJUSTMENT',
+  TRANSFER: 'TRANSFER'
+} as const
+
+export type StockMovementType = (typeof StockMovementType)[keyof typeof StockMovementType]
+
+
+export const OrderStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  PREPARING: 'PREPARING',
+  READY: 'READY',
+  DELIVERING: 'DELIVERING',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const PaymentStatus = {
+  UNPAID: 'UNPAID',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const PaymentMethod = {
+  CARD: 'CARD',
+  PAYPAL: 'PAYPAL',
+  CASH: 'CASH',
+  APPLE_PAY: 'APPLE_PAY',
+  GOOGLE_PAY: 'GOOGLE_PAY',
+  OTHER: 'OTHER'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const ReviewStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  RESPONDED: 'RESPONDED'
+} as const
+
+export type ReviewStatus = (typeof ReviewStatus)[keyof typeof ReviewStatus]
+
+
+export const VehicleType = {
+  BIKE: 'BIKE',
+  SCOOTER: 'SCOOTER',
+  CAR: 'CAR',
+  VAN: 'VAN',
+  ON_FOOT: 'ON_FOOT'
+} as const
+
+export type VehicleType = (typeof VehicleType)[keyof typeof VehicleType]
+
+
+export const DriverStatus = {
+  OFFLINE: 'OFFLINE',
+  AVAILABLE: 'AVAILABLE',
+  ON_DELIVERY: 'ON_DELIVERY',
+  ON_BREAK: 'ON_BREAK',
+  SUSPENDED: 'SUSPENDED'
+} as const
+
+export type DriverStatus = (typeof DriverStatus)[keyof typeof DriverStatus]
+
+
+export const DeliveryStatus = {
+  PENDING: 'PENDING',
+  ASSIGNED: 'ASSIGNED',
+  ACCEPTED: 'ACCEPTED',
+  PICKED_UP: 'PICKED_UP',
+  IN_TRANSIT: 'IN_TRANSIT',
+  DELIVERED: 'DELIVERED',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus]
+
+
+export const NotificationMedium = {
+  EMAIL: 'EMAIL',
+  SMS: 'SMS',
+  watsapp: 'watsapp',
+  PUSH: 'PUSH'
+} as const
+
+export type NotificationMedium = (typeof NotificationMedium)[keyof typeof NotificationMedium]
+
+
+export const NotificationType = {
+  ORDER_STATUS: 'ORDER_STATUS',
+  PROMOTION: 'PROMOTION',
+  DELIVERY_UPDATE: 'DELIVERY_UPDATE',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
+
+
+export const PromoType = {
+  PERCENTAGE: 'PERCENTAGE',
+  FIXED_AMOUNT: 'FIXED_AMOUNT',
+  FREE_DELIVERY: 'FREE_DELIVERY'
+} as const
+
+export type PromoType = (typeof PromoType)[keyof typeof PromoType]

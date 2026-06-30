@@ -1,4 +1,15 @@
-import React from 'react';
+//@/app/pro/page.tsx
+
+
+///type : page
+/*role : Page d'accueil de l'espace professionnel */
+/*fonctionnement : Affiche un tableau de bord ou une vue d'ensemble des activités */
+//imports []
+//exports [default]
+//useby []
+//noteIA merci de ne pas supprimer les commentaires ci-dessus, ils sont utilisés par l'IA pour comprendre le contexte du fichier et générer du code pertinent.
+
+import React from 'react'; 
 import { 
   Pizza, 
   Coffee, 

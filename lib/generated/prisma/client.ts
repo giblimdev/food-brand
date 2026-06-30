@@ -47,25 +47,85 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model Account
- * 
- */
-export type Account = Prisma.AccountModel
-/**
  * Model Session
  * 
  */
 export type Session = Prisma.SessionModel
 /**
- * Model VerificationToken
+ * Model Account
  * 
  */
-export type VerificationToken = Prisma.VerificationTokenModel
+export type Account = Prisma.AccountModel
+/**
+ * Model Verification
+ * 
+ */
+export type Verification = Prisma.VerificationModel
+/**
+ * Model Profile
+ * 
+ */
+export type Profile = Prisma.ProfileModel
+/**
+ * Model Epic
+ * 
+ */
+export type Epic = Prisma.EpicModel
+/**
+ * Model Feature
+ * 
+ */
+export type Feature = Prisma.FeatureModel
+/**
+ * Model Sprint
+ * 
+ */
+export type Sprint = Prisma.SprintModel
+/**
+ * Model Schema
+ * 
+ */
+export type Schema = Prisma.SchemaModel
+/**
+ * Model Model
+ * 
+ */
+export type Model = Prisma.ModelModel
+/**
+ * Model Field
+ * 
+ */
+export type Field = Prisma.FieldModel
+/**
+ * Model SchemaValidation
+ * 
+ */
+export type SchemaValidation = Prisma.SchemaValidationModel
+/**
+ * Model File
+ * 
+ */
+export type File = Prisma.FileModel
+/**
+ * Model Log
+ * 
+ */
+export type Log = Prisma.LogModel
 /**
  * Model Glossary
  * 
  */
 export type Glossary = Prisma.GlossaryModel
+/**
+ * Model Team
+ * 
+ */
+export type Team = Prisma.TeamModel
+/**
+ * Model TeamMember
+ * 
+ */
+export type TeamMember = Prisma.TeamMemberModel
 /**
  * Model Brand
  * 
@@ -86,3 +146,123 @@ export type Restaurant = Prisma.RestaurantModel
  * 
  */
 export type Recipe = Prisma.RecipeModel
+/**
+ * Model Tag
+ * 
+ */
+export type Tag = Prisma.TagModel
+/**
+ * Model Option
+ * 
+ */
+export type Option = Prisma.OptionModel
+/**
+ * Model Ingredient
+ * 
+ */
+export type Ingredient = Prisma.IngredientModel
+/**
+ * Model BrandIngredient
+ * 
+ */
+export type BrandIngredient = Prisma.BrandIngredientModel
+/**
+ * Model RecipeIngredient
+ * 
+ */
+export type RecipeIngredient = Prisma.RecipeIngredientModel
+/**
+ * Model StockMovement
+ * 
+ */
+export type StockMovement = Prisma.StockMovementModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model Cart
+ * 
+ */
+export type Cart = Prisma.CartModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
+/**
+ * Model OrderStatusHistory
+ * 
+ */
+export type OrderStatusHistory = Prisma.OrderStatusHistoryModel
+/**
+ * Model DailyStats
+ * 
+ */
+export type DailyStats = Prisma.DailyStatsModel
+/**
+ * Model Review
+ * 
+ */
+export type Review = Prisma.ReviewModel
+/**
+ * Model Driver
+ * 
+ */
+export type Driver = Prisma.DriverModel
+/**
+ * Model Delivery
+ * 
+ */
+export type Delivery = Prisma.DeliveryModel
+/**
+ * Model DeliveryTracking
+ * 
+ */
+export type DeliveryTracking = Prisma.DeliveryTrackingModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model Address
+ * 
+ */
+export type Address = Prisma.AddressModel
+/**
+ * Model Favorite
+ * 
+ */
+export type Favorite = Prisma.FavoriteModel
+/**
+ * Model Promotion
+ * 
+ */
+export type Promotion = Prisma.PromotionModel
+/**
+ * Model Gallery
+ * 
+ */
+export type Gallery = Prisma.GalleryModel
+/**
+ * Model Image
+ * 
+ */
+export type Image = Prisma.ImageModel
