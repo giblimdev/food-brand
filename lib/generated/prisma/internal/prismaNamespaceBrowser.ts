@@ -320,6 +320,8 @@ export const FileScalarFieldEnum = {
   fonctionnement: 'fonctionnement',
   imports: 'imports',
   exports: 'exports',
+  useby: 'useby',
+  noteIA: 'noteIA',
   content: 'content',
   parentId: 'parentId',
   syncStatus: 'syncStatus',
